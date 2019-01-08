@@ -13,8 +13,12 @@
 
 	<!-- Bootstrap core CSS -->
     <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css">
 	
     <!-- Custom styles for this template -->
-    <link href="https://getbootstrap.com/docs/4.2/examples/cover/cover.css">
+    <link rel="stylesheet"
+    href="https://getbootstrap.com/docs/4.2/examples/cover/cover.css">
+    
+    <!-- Google Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
