@@ -9,7 +9,20 @@ public class Agente {
 		private Long id_departamento;
 		private HashMap<Long, Multa> multas;
 		
+		public Agente() {
+			super();
+		}
 
+		public Agente(Long id, String nombre, String placa, Long id_departamento, HashMap<Long, Multa> multas) {
+			this();
+			setId(id_departamento);
+			setNombre(nombre);
+			setPlaca(placa);
+			setId_departamento(id_departamento);
+			setMultas(multas);
+		}
+		
+		
 		public Long getId() {
 			return id;
 		}
