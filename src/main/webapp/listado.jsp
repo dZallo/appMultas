@@ -15,7 +15,7 @@
   <tbody>
   <c:forEach items="${multas}" var="multa">
     <tr>
-      <th scope="row">${multa.value.matricula}</th>
+      <th scope="row">${multa.value.coche.matricula}</th>
       <td>${multa.value.fecha}</td>
     </tr>
     </c:forEach>
