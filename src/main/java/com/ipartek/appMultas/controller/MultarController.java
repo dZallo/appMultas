@@ -1,11 +1,14 @@
 package com.ipartek.appMultas.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ipartek.appMultas.modelo.pojo.Coche;
 
 /**
  * Servlet implementation class MultarController
@@ -19,20 +22,19 @@ public class MultarController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Llama al controlador matricula para cargar matricula.jsp y hacer la comprobación de la misma
-		request.getRequestDispatcher("matricula").forward(request, response);
+		doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Si los datos son incorrectos, crea alerta y redirecciona a formulario.jsp
+		//Llama al controlador matricula para cargar matricula.jsp y hacer la comprobación de la misma
+		//Recibo los parametros
+		Coche c = (Coche) request.getAttribute("coche");
+		request.setAttribute("coche", c);
+		request.getRequestDispatcher("formulario.jsp").forward(request, response);
 		
-		//Si los datos son correctos
-		
-		//Da de alta la matricula y redirecciona a la página principal
-		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }

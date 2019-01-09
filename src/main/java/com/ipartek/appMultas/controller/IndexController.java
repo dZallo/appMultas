@@ -21,12 +21,17 @@ import com.ipartek.appMultas.modelo.pojo.Agente;
 public class IndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AgenteDAO dao;
-	
+	private Agente agente; 
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		dao =AgenteDAO.getInstance();
+		//Cargar usuario
+		Long idAgente= 1L;
+		
+		agente = dao.getByID(idAgente);
+				
 	}
 	
 	@Override
@@ -38,10 +43,6 @@ public class IndexController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Cargar usuario
-		Long idAgente= 1L;
-		
-		Agente agente = dao.getByID(idAgente);
 		
 		HttpSession session= request.getSession();
 		session.setAttribute("agenteLogueado", agente);

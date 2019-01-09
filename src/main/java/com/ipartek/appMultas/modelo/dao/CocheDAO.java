@@ -31,7 +31,7 @@ public class CocheDAO {
 	}
 	
 	public Coche getByMatricula(String matricula) {
-		Coche c = new Coche();
+		Coche c = null;
 		
 		String sql = SQL_GETBYMATRICULA;
 		
@@ -84,7 +84,7 @@ public class CocheDAO {
 		Coche c  =new Coche();
 			c.setId(rs.getLong("id"));
 			c.setMatricula(rs.getString("matricula"));
-			c.setModelo(rs.getString(rs.getString("modelo")));
+			c.setModelo(rs.getString("modelo"));
 			c.setKm(rs.getLong("km"));
 		return c;
 	}

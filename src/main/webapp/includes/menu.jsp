@@ -5,7 +5,7 @@
       <h3 class="masthead-brand">${sessionScope.agenteLogueado.nombre}</h3>
       <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link" href="index">Inicio</a>
-        <a class="nav-link" href="multar">Multar</a>
+        <a class="nav-link" href="matricula">Multar</a>
         <a class="nav-link" href="listado">Ver Multas</a>
       </nav>
     </div>
