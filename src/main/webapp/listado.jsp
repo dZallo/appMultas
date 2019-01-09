@@ -13,54 +13,12 @@
 		    </tr>
 	  </thead>
   <tbody>
+  <c:forEach items="${multas}" var="multa">
     <tr>
-      <th scope="row">1234ABC</th>
-      <td>2019-01-01 23:36:25</td>
+      <th scope="row">${multa.value.matricula}</th>
+      <td>${multa.value.fecha}</td>
     </tr>
-    <tr>
-      <th scope="row">0000AAA</th>
-      <td>2019-03-01 10:42:08</td>
-    </tr>
-    <tr>
-      <th scope="row">4321CBA</th>
-      <td>2019-01-27 04:17:53</td>
-    </tr>
-     <tr>
-      <th scope="row">1234ABC</th>
-      <td>2019-01-01 23:36:25</td>
-    </tr>
-    <tr>
-      <th scope="row">0000AAA</th>
-      <td>2019-03-01 10:42:08</td>
-    </tr>
-    <tr>
-      <th scope="row">4321CBA</th>
-      <td>2019-01-27 04:17:53</td>
-    </tr>
-     <tr>
-      <th scope="row">1234ABC</th>
-      <td>2019-01-01 23:36:25</td>
-    </tr>
-    <tr>
-      <th scope="row">0000AAA</th>
-      <td>2019-03-01 10:42:08</td>
-    </tr>
-    <tr>
-      <th scope="row">4321CBA</th>
-      <td>2019-01-27 04:17:53</td>
-    </tr>
-     <tr>
-      <th scope="row">1234ABC</th>
-      <td>2019-01-01 23:36:25</td>
-    </tr>
-    <tr>
-      <th scope="row">0000AAA</th>
-      <td>2019-03-01 10:42:08</td>
-    </tr>
-    <tr>
-      <th scope="row">4321CBA</th>
-      <td>2019-01-27 04:17:53</td>
-    </tr>
+    </c:forEach>
   </tbody>
 </table>
     
