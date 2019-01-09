@@ -39,7 +39,7 @@ public class IndexController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Cargar usuario
-		Long idAgente= 4L;
+		Long idAgente= 1L;
 		
 		Agente agente = dao.getByID(idAgente);
 		
