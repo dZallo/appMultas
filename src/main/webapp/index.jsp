@@ -3,7 +3,7 @@
 <body class="text-center">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   <header class="masthead mb-auto">
-  <p>Prueba</p>
+ 
     <div class="inner">
       <h3 class="masthead-brand">${sessionScope.agenteLogueado.nombre}</h3>
      </div>
@@ -15,7 +15,6 @@
       <a href="matricula" class="btn btn-lg btn-secondary">Multar</a>
     </p>
     <p class="lead">
-    ANDER
       <a href="listado" class="btn btn-lg btn-secondary">Ver Multas</a>
     </p>
     <%@include file="includes/mensajes.jsp" %>
