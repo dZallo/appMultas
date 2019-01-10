@@ -6,8 +6,8 @@
     <p class="lead">Introduzca la matrícula del vehículo: </p>
     
     <form action="altamulta" method="POST">
-    <div class="form-group">
-	    <label for="matricula">CONFILCTO</label>
+    <div class="form-group">	    
+	    <label for="matricula">Numero bastidor</label>
 	    <input type="text" class="form-control" id="matricula" name="matricula" aria-describedby="matriculaHelp" placeholder="P.E: 1234AAA" value="${coche.matricula}" disabled>
   	</div>
   	<div class="form-group">
