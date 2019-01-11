@@ -82,7 +82,7 @@ public class AltaMultaController extends HttpServlet {
 				m.setConcepto(concepto);
 				m.setCoche(c);
 				
-				//TODO validar POJO
+				//Validar POJO
 				Set<ConstraintViolation<Multa>> violations = validator.validate(m);
 				
 				if(violations.size() > 0) {//Validacon no correcta	
