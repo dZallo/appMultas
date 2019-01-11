@@ -21,8 +21,12 @@
 	    <input type="hidden" id="id_coche" name="id_coche" value="${multa.coche.id }">
 	    <input type="hidden" id="id_agente" name="id_agente"  value="${sessionScope.agenteLogueado.id }">
   	</div>
+  	<p class="lead">
   	  <a href="listado" class="btn btn-lg btn-info">Volver al listado</a>
-      <a href="anular" class="btn btn-lg btn-warning mt-5">Anular multa</a>
+  	</p>
+  	<p class="lead">
+      <a href="anular" class="btn btn-lg btn-warning">Anular multa</a>
+    </p>
   	</form>
     
 <%@include file="includes/pie.jsp" %>
