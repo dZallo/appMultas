@@ -1,7 +1,6 @@
 package com.ipartek.appMultas.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
