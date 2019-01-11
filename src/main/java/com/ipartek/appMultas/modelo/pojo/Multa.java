@@ -1,12 +1,24 @@
 package com.ipartek.appMultas.modelo.pojo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class Multa {
 	private Long id;
+	
+	@NotNull
+	@Min(value=1, message = "El importe de la multa tiene que ser numérico y >=1")
 	private Double importe;
+	@NotEmpty
+	@Size(min=10, max=255)
 	private String concepto;
-	private Date fecha;
+	private Timestamp fecha;
 	private Coche coche;
 	
 	
@@ -16,7 +28,7 @@ public class Multa {
 	}
 	
 	
-	public Multa(Long id, Double importe, String concepto, Date fecha, Coche coche) {
+	public Multa(Long id, Double importe, String concepto, Timestamp fecha, Coche coche) {
 		this();
 		setId(id);;
 		setImporte(importe);
@@ -42,11 +54,12 @@ public class Multa {
 	public void setConcepto(String concepto) {
 		this.concepto = concepto;
 	}
-	public Date getFecha() {
+	public Timestamp getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setFecha(Timestamp fecha) {
+		
+		this.fecha =fecha;
 	}
 	public Coche getCoche() {
 		return coche;
@@ -106,6 +119,8 @@ public class Multa {
 		return "Multa [id=" + id + ", importe=" + importe + ", concepto=" + concepto + ", fecha=" + fecha + ", coche="
 				+ coche + "]";
 	}
+
+
 	
 	
 	

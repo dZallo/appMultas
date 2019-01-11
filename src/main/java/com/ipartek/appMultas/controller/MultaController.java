@@ -89,7 +89,7 @@ public class MultaController extends HttpServlet {
 		
 		//Redireccionar
 		
-		request.getRequestDispatcher("multa.jsp").forward(request, response);
+	//	request.getRequestDispatcher("multa.jsp").forward(request, response);
 	}
 
 	private void listar(HttpServletRequest request) {

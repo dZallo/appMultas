@@ -13,10 +13,10 @@ import com.ipartek.appMultas.modelo.pojo.Multa;
 
 public class MultaDAO {
 
-	private final static String SQL_GETALLBYIDAGENTE="SELECT m.id AS id_multa, importe, concepto, fecha ,id_agente,id_coche, c.matricula, c.modelo, c.km"
-														+ " FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE m.id_agente=?";
-	private final static String SQL_GETBYID="SELECT m.id AS id_multa, importe, concepto, fecha ,id_coche, c.matricula, c.modelo, c.km"
-											+ "	FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE m.id=";
+	private final static String SQL_GETALLBYIDAGENTE="SELECT m.id AS id_multa, importe, concepto, fecha_alta ,id_agente,id_coche, c.matricula, c.modelo, c.km"
+														+ " FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE id_agente=? ORDER BY fecha_alta DESC";
+	private final static String SQL_GETBYID="SELECT m.id AS id_multa, importe, concepto, fecha_alta ,id_coche, c.matricula, c.modelo, c.km"
+											+ "	FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE m.id=? ORDER BY fecha_alta DESC";
 	//private final static String SQL_GETALL="";
 	private final static String SQL_INSERT="INSERT INTO multa (importe,concepto,id_coche,id_agente) VALUES(?,?,?,?);";
 	
@@ -108,7 +108,7 @@ public class MultaDAO {
 			m.setId(rs.getLong("id_multa"));
 			m.setConcepto(rs.getString("concepto"));
 			m.setImporte(rs.getDouble("importe"));
-			m.setFecha(rs.getDate("fecha"));
+			m.setFecha(rs.getTimestamp("fecha_alta"));
 			//Seteo el coche
 			m.setCoche(new Coche(rs.getLong("id_coche"), rs.getString("matricula"), rs.getString("modelo"), rs.getLong("km")));
 		return m;
