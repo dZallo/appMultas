@@ -12,7 +12,7 @@
   	</div>
   	<div class="form-group">
 	    <label for="importe">Importe</label>
-	    <input type="number" class="form-control" id="importe" name="importe" aria-describedby="importeHelp" placeholder="P.E: 300" value="${importe}">
+	    <input type="number" class="form-control" id="importe" name="importe" aria-describedby="importeHelp" placeholder="P.E: 300" value="${importe}" autofocus>
   	</div>
   	<div class="form-group">
 	    <label for="concepto">Concepto</label>
