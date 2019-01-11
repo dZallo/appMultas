@@ -19,7 +19,8 @@ Debemos seguir los siguientes pasos:
 2. Copiar script 'dgt.sql'.
 3. Pegar contenido del script en nuestro SGBD (Sistema Gestor de Base de Datos).
 4. Comprobar que los datos de configuración de la BD corresponden con los indicados en el archivo 'resources < database.properties'.
-
+## Esquema Entidad-Relación de la Base de Datos DGT
+![Alt Esquema del E-R de la BD](https://github.com/dZallo/appMultas/blob/master/screnshoots/e-r_DGT.PNG)
 ## Pantallas principales de la aplicación
 
 ![Alt Página principal de la aplicación](https://github.com/dZallo/appMultas/blob/master/screnshoots/principal.PNG)
