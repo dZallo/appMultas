@@ -14,9 +14,13 @@ import com.ipartek.appMultas.modelo.pojo.Multa;
 public class MultaDAO {
 
 	private final static String SQL_GETALLBYIDAGENTE="SELECT m.id AS id_multa, importe, concepto, fecha_alta ,id_agente,id_coche, c.matricula, c.modelo, c.km"
-														+ " FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE id_agente=? ORDER BY fecha_alta DESC";
+														+ " FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE id_agente=? AND fecha_baja IS NULL ORDER BY fecha_alta DESC";
+	private final static String SQL_GETALLBYIDAGENTE_BAJA="SELECT m.id AS id_multa, importe, concepto, fecha_alta ,id_agente,id_coche, c.matricula, c.modelo, c.km"
+														+ " FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE id_agente=? AND m.fecha_baja IS NOT NULL"
+														+ "ORDER BY fecha_alta DESC ";
+	
 	private final static String SQL_GETBYID="SELECT m.id AS id_multa, importe, concepto, fecha_alta ,id_coche, c.matricula, c.modelo, c.km"
-											+ "	FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE m.id=? ORDER BY fecha_alta DESC";
+											+ "	FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE m.id=? AND fecha_baja IS NULL ORDER BY fecha_alta DESC";
 	//private final static String SQL_GETALL="";
 	private final static String SQL_INSERT="INSERT INTO multa (importe,concepto,id_coche,id_agente) VALUES(?,?,?,?);";
 	private final static String SQL_UPDATE_FECHA_BAJA="UPDATE multa SET fecha_baja=CURRENT_TIMESTAMP() WHERE id =?";
@@ -65,6 +69,29 @@ public class MultaDAO {
 		HashMap<Long, Multa> multasAgente= new HashMap<>();
 		Multa m = new Multa();
 		String sql = SQL_GETALLBYIDAGENTE;
+		try(
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement pst = conn.prepareStatement(sql);	
+			){
+			pst.setLong(1, idAgente);
+			try(
+					ResultSet rs = pst.executeQuery()
+					){
+					while(rs.next()) {
+						m = rowMapper(rs);
+						multasAgente.put(m.getId(), m);
+					}
+				}
+		}catch (Exception e) {
+			LOG.debug(e);
+		}
+		
+		return multasAgente;
+	}
+	public HashMap<Long, Multa> getAllByIdAgenteDarBaja(Long idAgente) throws SQLException{
+		HashMap<Long, Multa> multasAgente= new HashMap<>();
+		Multa m = new Multa();
+		String sql = SQL_GETALLBYIDAGENTE_BAJA;
 		try(
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);	
