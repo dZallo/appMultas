@@ -19,6 +19,7 @@ public class MultaDAO {
 											+ "	FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE m.id=? ORDER BY fecha_alta DESC";
 	//private final static String SQL_GETALL="";
 	private final static String SQL_INSERT="INSERT INTO multa (importe,concepto,id_coche,id_agente) VALUES(?,?,?,?);";
+	private final static String SQL_UPDATE_FECHA_BAJA="UPDATE multa SET fecha_baja=CURRENT_TIMESTAMP() WHERE id =?";
 	
 	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
 	private static MultaDAO INSTANCE=null;
@@ -101,6 +102,25 @@ public class MultaDAO {
 			}	
 		}
 		return resul;
+	}
+	
+	public boolean darBajaMulta(Multa m) throws SQLException{
+		boolean result = false;
+		String sql =SQL_UPDATE_FECHA_BAJA;
+		try(Connection conn = ConnectionManager.getConnection();
+			PreparedStatement pst = conn.prepareStatement(sql);
+			){
+			pst.setLong(1, m.getId());
+			
+			int affectedRows = pst.executeUpdate();
+			if(affectedRows== 1){
+				result =true;
+			}	
+		}
+		
+		
+		
+		return result;
 	}
 	
 	private Multa rowMapper(ResultSet rs) throws SQLException {
