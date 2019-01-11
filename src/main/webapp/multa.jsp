@@ -22,7 +22,7 @@
 	    <input type="hidden" id="id_agente" name="id_agente"  value="${sessionScope.agenteLogueado.id }">
   	</div>
   	  <a href="listado" class="btn btn-lg btn-info">Volver al listado</a>
-      <a href="anular" class="btn btn-lg btn-warning">Anular multa</a>
+      <a href="anular" class="btn btn-lg btn-warning mt-5">Anular multa</a>
   	</form>
     
 <%@include file="includes/pie.jsp" %>
