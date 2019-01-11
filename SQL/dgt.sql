@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `dgt` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `dgt`;
--- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
 -- Host: localhost    Database: dgt
 -- ------------------------------------------------------
@@ -137,17 +137,19 @@ DROP TABLE IF EXISTS `multa`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `multa` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `importe` float NOT NULL DEFAULT '50',
-  `concepto` varchar(255) NOT NULL,
-  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_coche` int(11) NOT NULL,
   `id_agente` int(11) NOT NULL,
+  `importe` float NOT NULL DEFAULT '50',
+  `concepto` varchar(255) NOT NULL,
+  `fecha_alta` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha_modificacion` datetime DEFAULT NULL,
+  `fecha_baja` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_multas_coches_idx` (`id_coche`),
   KEY `fk_multas_agentes_idx` (`id_agente`),
   CONSTRAINT `fk_multas_agentes` FOREIGN KEY (`id_agente`) REFERENCES `agente` (`id`),
   CONSTRAINT `fk_multas_coches` FOREIGN KEY (`id_coche`) REFERENCES `coche` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +158,7 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (1,200,'por feo','2019-01-07 10:36:52',3,3),(2,500,'exceso velocidad 240km/h','2019-01-07 10:38:46',6,1),(3,700,'por empinar codo 8.0','2018-12-31 22:40:52',1,2),(4,700,'por empinar codo 8.0','2019-01-07 10:41:55',1,2),(5,1400,'por ir a200k/h en zona de 30km/h','2019-01-07 12:40:21',1,1),(6,200,'por no cambiar el coche (feo)','2019-01-07 12:40:40',3,3),(7,500,'Pasar semáforo en rojo','2019-01-09 13:25:34',1,1),(8,90,'Hacerme una peineta','2019-01-09 13:27:19',6,1),(9,1000,'Aparcar donde no debe','2019-01-09 13:29:00',6,1),(10,3000,'Muuu malo','2019-01-09 13:47:28',1,1),(11,1,'Objeto no identificado: sdafdsfsafd','2019-01-09 13:48:03',1,1),(12,2,'Me ha rayado el buga','2019-01-09 13:49:56',1,1),(13,3,'Me a hecho un calvo','2019-01-09 13:50:13',1,1),(14,200,'Me ha llamado \"Sr. Anacardo\"','2019-01-09 13:50:42',6,1),(15,2,'Me quería dar propina','2019-01-09 13:51:19',6,1);
+INSERT INTO `multa` VALUES (1,3,3,200,'por feo','2019-01-07 10:36:52',NULL,NULL),(2,6,1,500,'exceso velocidad 240km/h','2019-01-07 10:38:46',NULL,NULL),(3,1,2,700,'por empinar codo 8.0','2018-12-31 22:40:52',NULL,NULL),(4,1,2,700,'por empinar codo 8.0','2019-01-07 10:41:55',NULL,NULL),(5,1,1,1400,'por ir a200k/h en zona de 30km/h','2019-01-07 12:40:21',NULL,NULL),(6,3,3,200,'por no cambiar el coche (feo)','2019-01-07 12:40:40',NULL,NULL),(7,1,1,500,'Pasar semáforo en rojo','2019-01-09 13:25:34',NULL,NULL),(8,6,1,90,'Hacerme una peineta','2019-01-09 13:27:19',NULL,NULL),(9,6,1,1000,'Aparcar donde no debe','2019-01-09 13:29:00',NULL,NULL),(10,1,1,3000,'Muuu malo','2019-01-09 13:47:28',NULL,NULL),(11,1,1,1,'Objeto no identificado: sdafdsfsafd','2019-01-09 13:48:03',NULL,NULL),(12,1,1,2,'Me ha rayado el buga','2019-01-09 13:49:56',NULL,NULL),(13,1,1,3,'Me a hecho un calvo','2019-01-09 13:50:13',NULL,NULL),(14,6,1,200,'Me ha llamado \"Sr. Anacardo\"','2019-01-09 13:50:42',NULL,NULL),(15,6,1,2,'Me quería dar propina','2019-01-09 13:51:19',NULL,NULL),(16,1,1,300,'Se ha pasado de velocidad','2019-01-09 14:17:42',NULL,NULL),(17,1,1,500,'Ha excedido el límite de velocidad, 20km/h','2019-01-10 12:12:51',NULL,NULL);
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,4 +201,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-09 13:52:25
+-- Dump completed on 2019-01-11  9:23:05
