@@ -1,15 +1,19 @@
 package com.ipartek.appMultas.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
 import com.ipartek.appMultas.modelo.dao.MultaDAO;
+import com.ipartek.appMultas.modelo.pojo.Agente;
 import com.ipartek.appMultas.modelo.pojo.Multa;
 
 /**
@@ -23,6 +27,8 @@ public class MultaController extends HttpServlet {
 	
 	private static final String OP_LISTAR = "1";
 	private static final String OP_IR_FORMULARIO = "2";
+	private static final String OP_DAR_DE_BAJA = "3";
+	private static final String OP_LISTADO_BAJA = "4";
 	
 	private MultaDAO daoMulta = null;
 
@@ -59,16 +65,19 @@ public class MultaController extends HttpServlet {
 				case OP_IR_FORMULARIO:
 					irFormulario(request);
 					break;
+				case OP_DAR_DE_BAJA:
+					darDeBaja(request);
+					break;
+				case OP_LISTADO_BAJA:
+					listadoBaja(request);
+					break;
 				default:
 					listar(request);
 					break;
 			}
-			
-			//Enviar atributos
-			
-	
+
 		}catch (Exception e) {
-//			LOG.error(e);
+			LOG.error(e);
 //			alerta.setAlerta("Error inesperado, sentimos las molestias");
 //			alerta.setTipo(ALERTA_DANGER);
 		}finally {
@@ -77,23 +86,34 @@ public class MultaController extends HttpServlet {
 			//Ir a una vista
 			request.getRequestDispatcher(vista).forward(request, response);
 		}
+
+	}
+
+	private void listadoBaja(HttpServletRequest request) {
+		vista = "listadoBajas.jsp";
+		HttpSession session = request.getSession();
+		Agente a = (Agente) session.getAttribute("agenteLogueado");
+		try {
+			request.setAttribute("multas", daoMulta.getAllByIdAgenteDarBaja(a.getId()));
+		} catch (SQLException e) {
+			LOG.error(e);
+		}
 		
-		//Obtener multa
+	}
+
+	private void darDeBaja(HttpServletRequest request) {
+		try {
+			daoMulta.darBajaMulta(id);
+			listadoBaja(request);
+		} catch (SQLException e) {
+			LOG.error(e);
+			//No ha sido posible retirar la multa
+		}
 		
-		//Existe multa
-			//SI
-			//Enviar multa
-		
-			//NO
-			//Volver al listado
-		
-		//Redireccionar
-		
-	//	request.getRequestDispatcher("multa.jsp").forward(request, response);
 	}
 
 	private void listar(HttpServletRequest request) {
-		// Está predefinada la lista
+		// Está predefinida la lista
 		//Las multas se sacan en el propio controller de listar
 		
 	}
@@ -113,8 +133,12 @@ public class MultaController extends HttpServlet {
 		if (op==null) {
 			op = OP_LISTAR;
 		}
-		
-		id = Long.parseLong(request.getParameter("id"));
+		String idTexto = request.getParameter("id");
+		if(idTexto == null) {
+			id = 0L;
+		}else {
+			id = Long.parseLong(request.getParameter("id"));
+		}
 		
 		LOG.debug(String.format("Parametros: op=%s id=%s", op, id));
 		

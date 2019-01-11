@@ -22,7 +22,7 @@
 	    <input type="hidden" id="id_agente" name="id_agente"  value="${sessionScope.agenteLogueado.id }">
   	</div>
   	<p class="lead">
-      <a href="anular" class="btn btn-lg btn-warning">Anular multa</a>
+      <a href="multa?op=3&id=${multa.id}" class="btn btn-lg btn-warning">Anular multa</a>
     </p>
   	<p class="lead">
   	  <a href="listado" class="btn btn-lg btn-info">Volver al listado</a>

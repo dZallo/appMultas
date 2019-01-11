@@ -10,19 +10,24 @@
 		    <tr>
 		      <th scope="col">Matrícula</th>
 		      <th scope="col">Fecha</th>
+		      <th scope="col">Concepto</th>
+		      <th scope="col">Importe</th>
 		    </tr>
 	  </thead>
   <tbody>
   <c:forEach items="${multas}" var="multa">
     <tr>
       <th scope="row">${multa.value.coche.matricula}</th>
-      <td><a href="multa?op=2&id=${multa.key}">${multa.value.fecha}</a></td>
+      <td>${multa.value.fecha}</td>
+      <td>${multa.value.concepto}</td>
+      <td>${multa.value.importe}&euro;</td>
     </tr>
     </c:forEach>
   </tbody>
 </table>
+
 <p class="lead">
-<a href="multa?op=4" class="btn btn-lg btn-warning">Listado de Bajas</a>
+<a href="listado" class="btn btn-lg btn-info">Listado de multas</a>
 </p>
     
 <%@include file="includes/pie.jsp" %>

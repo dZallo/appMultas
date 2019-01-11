@@ -16,7 +16,7 @@ public class MultaDAO {
 	private final static String SQL_GETALLBYIDAGENTE="SELECT m.id AS id_multa, importe, concepto, fecha_alta ,id_agente,id_coche, c.matricula, c.modelo, c.km"
 														+ " FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE id_agente=? AND fecha_baja IS NULL ORDER BY fecha_alta DESC";
 	private final static String SQL_GETALLBYIDAGENTE_BAJA="SELECT m.id AS id_multa, importe, concepto, fecha_alta ,id_agente,id_coche, c.matricula, c.modelo, c.km"
-														+ " FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE id_agente=? AND m.fecha_baja IS NOT NULL"
+														+ " FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE id_agente=? AND m.fecha_baja IS NOT NULL "
 														+ "ORDER BY fecha_alta DESC ";
 	
 	private final static String SQL_GETBYID="SELECT m.id AS id_multa, importe, concepto, fecha_alta ,id_coche, c.matricula, c.modelo, c.km"
