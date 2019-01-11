@@ -131,13 +131,13 @@ public class MultaDAO {
 		return resul;
 	}
 	
-	public boolean darBajaMulta(Multa m) throws SQLException{
+	public boolean darBajaMulta(Long id) throws SQLException{
 		boolean result = false;
 		String sql =SQL_UPDATE_FECHA_BAJA;
 		try(Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pst = conn.prepareStatement(sql);
 			){
-			pst.setLong(1, m.getId());
+			pst.setLong(1, id);
 			
 			int affectedRows = pst.executeUpdate();
 			if(affectedRows== 1){
