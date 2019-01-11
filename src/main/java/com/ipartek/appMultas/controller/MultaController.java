@@ -22,71 +22,79 @@ import com.ipartek.appMultas.modelo.pojo.Multa;
 @WebServlet("/multa")
 public class MultaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private final static Logger LOG = Logger.getLogger(MultaController.class);
-	
+
 	private static final String OP_LISTAR = "1";
 	private static final String OP_IR_FORMULARIO = "2";
 	private static final String OP_DAR_DE_BAJA = "3";
 	private static final String OP_LISTADO_BAJA = "4";
-	
+
 	private MultaDAO daoMulta = null;
 
 	private String vista;
-	//Parámetros
+	// Parámetros
 	private String op;
 	private Long id;
-	
+
 	@Override
 	public void init() throws ServletException {
 		super.init();
 		daoMulta = MultaDAO.getInstance();
 	}
-	
+
 	@Override
 	public void destroy() {
 		super.destroy();
 		daoMulta = null;
 	}
-	
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		vista = "listado";
-//		alerta = new Mensaje();
+		//alerta = new Mensaje();
 		try {
-			//Recoger parámetros
+			// Recoger parámetros
 			getParametros(request);
-			
-			//Realizar operación
+
+			// Realizar operación
 			switch (op) {
-				case OP_IR_FORMULARIO:
-					irFormulario(request);
-					break;
-				case OP_DAR_DE_BAJA:
-					darDeBaja(request);
-					break;
-				case OP_LISTADO_BAJA:
-					listadoBaja(request);
-					break;
-				default:
-					listar(request);
-					break;
+			case OP_IR_FORMULARIO:
+				irFormulario(request);
+				break;
+			case OP_DAR_DE_BAJA:
+				darDeBaja(request);
+				break;
+			case OP_LISTADO_BAJA:
+				listadoBaja(request);
+				break;
+			default:
+				listar(request);
+				break;
 			}
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			LOG.error(e);
-//			alerta.setAlerta("Error inesperado, sentimos las molestias");
-//			alerta.setTipo(ALERTA_DANGER);
-		}finally {
-			//Mensaje para el usuario
-			//request.setAttribute("mensaje", alerta);
-			//Ir a una vista
+		} finally {
+
+			// Ir a una vista
 			request.getRequestDispatcher(vista).forward(request, response);
 		}
 
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 	private void listadoBaja(HttpServletRequest request) {
@@ -98,7 +106,7 @@ public class MultaController extends HttpServlet {
 		} catch (SQLException e) {
 			LOG.error(e);
 		}
-		
+
 	}
 
 	private void darDeBaja(HttpServletRequest request) {
@@ -107,21 +115,21 @@ public class MultaController extends HttpServlet {
 			listadoBaja(request);
 		} catch (SQLException e) {
 			LOG.error(e);
-			//No ha sido posible retirar la multa
+			// No ha sido posible retirar la multa
 		}
-		
+
 	}
 
 	private void listar(HttpServletRequest request) {
 		// Está predefinida la lista
-		//Las multas se sacan en el propio controller de listar
-		
+		// Las multas se sacan en el propio controller de listar
+
 	}
 
 	private void irFormulario(HttpServletRequest request) {
 		vista = "multa.jsp";
 		Multa m = new Multa();
-		
+
 		if (id > 0) {
 			m = daoMulta.getById(id);
 		}
@@ -130,25 +138,18 @@ public class MultaController extends HttpServlet {
 
 	private void getParametros(HttpServletRequest request) {
 		op = request.getParameter("op");
-		if (op==null) {
+		if (op == null) {
 			op = OP_LISTAR;
 		}
 		String idTexto = request.getParameter("id");
-		if(idTexto == null) {
+		if (idTexto == null) {
 			id = 0L;
-		}else {
+		} else {
 			id = Long.parseLong(request.getParameter("id"));
 		}
-		
-		LOG.debug(String.format("Parametros: op=%s id=%s", op, id));
-		
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		LOG.debug(String.format("Parametros: op=%s id=%s", op, id));
+
 	}
 
 }
