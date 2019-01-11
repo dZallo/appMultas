@@ -1,7 +1,7 @@
   </main>
   <footer class="mastfoot mt-auto">
     <div class="inner">
-      <p>Ander Solana & Daniel Zallo</p>
+      <p>Ander Solana &#38; Daniel Zallo</p>
     </div>
   </footer>
 </div>

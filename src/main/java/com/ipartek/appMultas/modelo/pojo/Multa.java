@@ -1,6 +1,5 @@
 package com.ipartek.appMultas.modelo.pojo;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.validation.constraints.Min;
