@@ -35,20 +35,20 @@ public class AltaMultaController extends HttpServlet {
 	private MultaDAO daoMulta;
 	private Double importe;
 	private Long idAgente;
-	private String concepto ="";
+	private String concepto = "";
 	private Coche c;
-	
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		daoCoche = CocheDAO.getInstance();
 		daoMulta = MultaDAO.getInstance();
-		
+
 		// Crear Factoria y Validador
-			factory = Validation.buildDefaultValidatorFactory();
-			validator = factory.getValidator();
+		factory = Validation.buildDefaultValidatorFactory();
+		validator = factory.getValidator();
 	}
-	
+
 	@Override
 	public void destroy() {
 		super.destroy();
@@ -57,86 +57,91 @@ public class AltaMultaController extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doProcess(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request,response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doProcess(request, response);
 	}
 
-	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void doProcess(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
-			//Obtener los parametros
+			// Obtener los parametros
 			getParameters(request);
-			
-			
-				//Generamos la nueva Multa
-				Multa m = new Multa();
-				m.setImporte(importe);
-				m.setConcepto(concepto);
-				m.setCoche(c);
-				
-				//Validar POJO
-				Set<ConstraintViolation<Multa>> violations = validator.validate(m);
-				
-				if(violations.size() > 0) {//Validacon no correcta	
-					String errores = "<ul class='list-unstyled'>";
-					for (ConstraintViolation<Multa> violation : violations) {
-						errores += String.format("<li> %s : %s </li>", violation.getPropertyPath(), violation.getMessage());
-					}
-					errores += "</ul>";
-					request.setAttribute("mensaje", new Mensaje(Mensaje.TIPO_DANGER, errores));
-					
-					
-					// volver al formulario, cuidado que no se pierdan los valores en el form
-					reWriteField(request);
-					//Volver al formulario
-					request.getRequestDispatcher("multar").forward(request, response);
-					
-				}else {
-					//Correcto: Insert en la DB
-					daoMulta.insert(m, idAgente);
-					LOG.info("Multa creada :" + m.toString());
-					//Crear mensaje
-					request.setAttribute("mensaje", new Mensaje(Mensaje.TIPO_SUCCESS, "Multa registrada correctamente."));
-					//Volver a index
-					request.getRequestDispatcher("index").forward(request, response);
+
+			// Generamos la nueva Multa
+			Multa m = new Multa();
+			m.setImporte(importe);
+			m.setConcepto(concepto);
+			m.setCoche(c);
+
+			// Validar POJO
+			Set<ConstraintViolation<Multa>> violations = validator.validate(m);
+
+			if (violations.size() > 0) {// Validacon no correcta
+				String errores = "<ul class='list-unstyled'>";
+				for (ConstraintViolation<Multa> violation : violations) {
+					errores += String.format("<li> %s : %s </li>", violation.getPropertyPath(), violation.getMessage());
 				}
-		}catch (NumberFormatException e) {
+				errores += "</ul>";
+				request.setAttribute("mensaje", new Mensaje(Mensaje.TIPO_DANGER, errores));
+
+				// volver al formulario, cuidado que no se pierdan los valores en el form
+				reWriteField(request);
+				// Volver al formulario
+				request.getRequestDispatcher("multar").forward(request, response);
+
+			} else {
+				// Correcto: Insert en la DB
+				daoMulta.insert(m, idAgente);
+				LOG.info("Multa creada :" + m.toString());
+				// Crear mensaje
+				request.setAttribute("mensaje", new Mensaje(Mensaje.TIPO_SUCCESS, "Multa registrada correctamente."));
+				// Volver a index
+				request.getRequestDispatcher("index").forward(request, response);
+			}
+		} catch (NumberFormatException e) {
 			// Importe no es numérico
 			LOG.debug(e.getMessage());
 			request.setAttribute("mensaje", new Mensaje(Mensaje.TIPO_DANGER, " Se esperaba un número"));
-			
+
 			reWriteField(request);
-			
-			//Volver al formulario
+
+			// Volver al formulario
 			request.getRequestDispatcher("multar").forward(request, response);
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			LOG.debug(e.getMessage());
 			request.setAttribute("mensaje", new Mensaje(Mensaje.TIPO_DANGER, "Error inesperado"));
-			
+
 		}
-		
+
 	}
-	/** 
+
+	/**
 	 * Metodo que obtiene todo los parametros
+	 * 
 	 * @param request
 	 */
 	private void getParameters(HttpServletRequest request) {
-		//Recoger datos
-		//String matricula = request.getParameter("matricula");
+		// Recoger datos
+		// String matricula = request.getParameter("matricula");
 		concepto = request.getParameter("concepto");
 		String importeTexto = request.getParameter("importe");
 		try {
-			importe=Double.parseDouble(importeTexto);
-			
+			importe = Double.parseDouble(importeTexto);
+
 		} catch (NumberFormatException e) {
 			importe = (double) 0;
 		}
@@ -144,12 +149,14 @@ public class AltaMultaController extends HttpServlet {
 		c = daoCoche.getBYId(idCoche);
 		idAgente = Long.parseLong(request.getParameter("id_agente"));
 	}
-	/** 
+
+	/**
 	 * Metod que reescribe los campos del formulario
+	 * 
 	 * @param request
 	 */
 	private void reWriteField(HttpServletRequest request) {
-		//Reesccribir campos
+		// Reesccribir campos
 		request.setAttribute("importe", importe);
 		request.setAttribute("concepto", concepto);
 		request.setAttribute("coche", c);

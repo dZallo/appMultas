@@ -5,12 +5,11 @@ public class Coche {
 	private String matricula;
 	private String modelo;
 	private Long km;
-	
+
 	public Coche() {
 		super();
 	}
-	
-	
+
 	public Coche(Long id, String matricula, String modelo, Long km) {
 		this();
 		setId(id);
@@ -19,31 +18,38 @@ public class Coche {
 		setKm(km);
 
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getMatricula() {
 		return matricula;
 	}
+
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
+
 	public String getModelo() {
 		return modelo;
 	}
+
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
+
 	public Long getKm() {
 		return km;
 	}
+
 	public void setKm(Long km) {
 		this.km = km;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -55,7 +61,6 @@ public class Coche {
 		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -89,14 +94,9 @@ public class Coche {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Coche [id=" + id + ", matricula=" + matricula + ", modelo=" + modelo + ", km=" + km + "]";
 	}
-	
-	
-	
-	
-	
+
 }

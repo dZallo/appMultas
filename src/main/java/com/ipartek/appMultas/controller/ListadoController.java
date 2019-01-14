@@ -19,21 +19,22 @@ import com.ipartek.appMultas.modelo.pojo.Agente;
 import com.ipartek.appMultas.modelo.pojo.Multa;
 
 /**
- * Servlet implementation class ListadoController
- * PARA OBTENER Y LISTAR TODAS LAS MULTAS
+ * Servlet implementation class ListadoController PARA OBTENER Y LISTAR TODAS
+ * LAS MULTAS
  */
 @WebServlet("/listado")
 public class ListadoController extends HttpServlet {
 	private final static Logger LOG = Logger.getLogger(ListadoController.class);
 	private static final long serialVersionUID = 1L;
 	private MultaDAO dao;
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		
-		dao=MultaDAO.getInstance();
+
+		dao = MultaDAO.getInstance();
 	}
-	
+
 	@Override
 	public void destroy() {
 		super.destroy();
@@ -41,34 +42,36 @@ public class ListadoController extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HashMap<Long, Multa>multas = new HashMap<>();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HashMap<Long, Multa> multas = new HashMap<>();
 		Agente a = new Agente();
 
-		
 		try {
-			//Obtener el agente logueado
-			HttpSession sessionn= request.getSession();
+			// Obtener el agente logueado
+			HttpSession sessionn = request.getSession();
 			a = (Agente) sessionn.getAttribute("agenteLogueado");
-			
+
 			multas = dao.getAllByIdAgente(a.getId());
 			request.setAttribute("multas", multas);
-			
-			
+
 		} catch (SQLException e) {
 			LOG.debug(e);
-		}finally {
-			//Obtiene todo el listado de las multas y redirecciona a listado.jsp
+		} finally {
+			// Obtiene todo el listado de las multas y redirecciona a listado.jsp
 			request.getRequestDispatcher("listado.jsp").forward(request, response);
 		}
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

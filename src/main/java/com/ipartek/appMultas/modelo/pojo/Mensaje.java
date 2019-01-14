@@ -1,36 +1,39 @@
 package com.ipartek.appMultas.modelo.pojo;
 
 public class Mensaje {
-	public static final String TIPO_PRIMARY ="primary";
-	public static final String TIPO_SUCCESS ="success";
-	public static final String TIPO_DANGER ="danger";
-	public static final String TIPO_WARNING ="warning";
-	public static final String TIPO_INFO ="info";
-	
+	public static final String TIPO_PRIMARY = "primary";
+	public static final String TIPO_SUCCESS = "success";
+	public static final String TIPO_DANGER = "danger";
+	public static final String TIPO_WARNING = "warning";
+	public static final String TIPO_INFO = "info";
+
 	private String texto;
 	private String tipo;
-	
+
 	public Mensaje() {
 		super();
-;
+		;
 	}
-	
-	public Mensaje(String tipo,String texto) {
+
+	public Mensaje(String tipo, String texto) {
 		this();
 		setTexto(texto);
 		setTipo(tipo);
-		
+
 	}
 
 	public String getTexto() {
 		return texto;
 	}
+
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
+
 	public String getTipo() {
 		return tipo;
 	}
+
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
@@ -70,6 +73,5 @@ public class Mensaje {
 	public String toString() {
 		return "Mensaje [texto=" + texto + ", tipo=" + tipo + "]";
 	}
-	
-	
+
 }

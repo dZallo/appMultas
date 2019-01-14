@@ -14,48 +14,53 @@ import com.ipartek.appMultas.modelo.dao.AgenteDAO;
 import com.ipartek.appMultas.modelo.pojo.Agente;
 
 /**
- * Servlet implementation class IndexController
- * CONTROLLER PARA CARGAR EL USUARIO Y REDIRECCIONAR A INDEX.JSP
+ * Servlet implementation class IndexController CONTROLLER PARA CARGAR EL
+ * USUARIO Y REDIRECCIONAR A INDEX.JSP
  */
 @WebServlet("/index")
 public class IndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AgenteDAO dao;
-	private Agente agente; 
-	
+	private Agente agente;
+
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		dao =AgenteDAO.getInstance();
-		//Cargar usuario
-		Long idAgente= 1L;
-		
+		dao = AgenteDAO.getInstance();
+		// Cargar usuario
+		Long idAgente = 1L;
+
 		agente = dao.getByID(idAgente);
-				
+
 	}
-	
+
 	@Override
 	public void destroy() {
 		super.destroy();
-		dao=null;
+		dao = null;
 	}
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session= request.getSession();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		HttpSession session = request.getSession();
 		session.setAttribute("agenteLogueado", agente);
-		session.setMaxInactiveInterval(6*100);
-		
-		//Redireccionar a index.jsp
+		session.setMaxInactiveInterval(6 * 100);
+
+		// Redireccionar a index.jsp
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

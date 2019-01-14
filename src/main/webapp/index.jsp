@@ -17,5 +17,5 @@
     <p class="lead">
       <a href="listado" class="btn btn-lg btn-secondary">Ver Multas</a>
     </p>
-    <%@include file="includes/mensajes.jsp" %>
+<%@include file="includes/mensajes.jsp" %>
 <%@include file="includes/pie.jsp" %>
