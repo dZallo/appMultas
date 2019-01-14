@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.appMultas.modelo.dao.MultaDAO;
 import com.ipartek.appMultas.modelo.pojo.Agente;
+import com.ipartek.appMultas.modelo.pojo.Mensaje;
 import com.ipartek.appMultas.modelo.pojo.Multa;
 
 /**
@@ -33,6 +34,7 @@ public class MultaController extends HttpServlet {
 	private MultaDAO daoMulta = null;
 
 	private String vista;
+	private Mensaje alerta;
 	// Parámetros
 	private String op;
 	private Long id;
@@ -57,7 +59,7 @@ public class MultaController extends HttpServlet {
 			throws ServletException, IOException {
 
 		vista = "listado";
-		//alerta = new Mensaje();
+		alerta = new Mensaje();
 		try {
 			// Recoger parámetros
 			getParametros(request);
@@ -113,16 +115,21 @@ public class MultaController extends HttpServlet {
 		try {
 			daoMulta.darBajaMulta(id);
 			listadoBaja(request);
+			alerta.setTipo(Mensaje.TIPO_SUCCESS);
+			alerta.setTexto("Se ha anulado la multa correctamente. ");
+			request.setAttribute("mensaje", alerta);
 		} catch (SQLException e) {
 			LOG.error(e);
-			// No ha sido posible retirar la multa
+			alerta.setTipo(Mensaje.TIPO_DANGER);
+			alerta.setTexto("No ha sido posible anular la multa. ");
+			request.setAttribute("mensaje", alerta);
 		}
-
 	}
 
 	private void listar(HttpServletRequest request) {
-		// Está predefinida la lista
-		// Las multas se sacan en el propio controller de listar
+		alerta.setTipo(Mensaje.TIPO_INFO);
+		alerta.setTexto("Visualizando todas las multas activas. ");
+		request.setAttribute("mensaje", alerta);
 
 	}
 

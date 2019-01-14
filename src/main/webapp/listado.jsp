@@ -1,5 +1,6 @@
 <%@include file="includes/cabecera.jsp" %>
 <%@include file="includes/menu.jsp" %>
+<%@include file="includes/mensajes.jsp" %>
 
 <main role="main" class="inner cover">
     <h1 class="cover-heading">Todas las multas</h1>
