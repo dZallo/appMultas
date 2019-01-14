@@ -21,8 +21,31 @@
 	    <input type="hidden" id="id_coche" name="id_coche" value="${multa.coche.id }">
 	    <input type="hidden" id="id_agente" name="id_agente"  value="${sessionScope.agenteLogueado.id }">
   	</div>
+  	
+  	
+  	<div class="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Atención!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Estás seguro de que deseas anular la multa?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <a href="multa?op=3&id=${multa.id}" class="btn btn-lg btn-warning">Anular multa</a>
+      </div>
+    </div>
+  </div>
+</div>
+  	
+  	
   	<p class="lead">
-      <a href="multa?op=3&id=${multa.id}" class="btn btn-lg btn-warning">Anular multa</a>
+      <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">Anular multa</button>
     </p>
   	<p class="lead">
   	  <a href="listado" class="btn btn-lg btn-info">Volver al listado</a>
