@@ -15,9 +15,18 @@
 	<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
 	<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 	<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
-	<script>$(document).ready(function() {
-	    $('#tabla_multas').DataTable();
-	} );</script>
+	<script>	
+	$(document).ready(function() {
+	    $('#tabla_multas').DataTable({
+	    	 language: {
+		 	        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json'		 	       	
+		 	    },
+		 	 "lengthMenu": [[25,50,-1], [25,50,"All"]],
+		 	"order": [[ 1, "desc" ]]
+	    	
+	    });
+	} );
+	</script>
 </body>
 </html>
 
