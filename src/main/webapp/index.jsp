@@ -5,7 +5,7 @@
   <header class="masthead mb-auto">
  
     <div class="inner">
-      <h3 class="masthead-brand">${sessionScope.agenteLogueado.nombre}</h3>
+      <h3 class="masthead-brand"><a href="index"><img src="img/fee64.png"></a>${sessionScope.agenteLogueado.nombre}</h3>
      </div>
   </header>
 <main role="main" class="inner cover">

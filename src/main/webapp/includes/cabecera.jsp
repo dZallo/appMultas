@@ -11,6 +11,9 @@
     <meta name="generator" content="Jekyll v3.8.5">
     <title>Aplicación Multas</title>
 
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="img/fee.png">
+
 	<!-- Bootstrap core CSS -->
     <link rel="stylesheet"
 	href="https://getbootstrap.com/docs/4.2/dist/css/bootstrap.min.css">
