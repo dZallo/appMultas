@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
@@ -101,7 +102,7 @@ public class MultaDAO {
 	public boolean insert(Multa m, Long id_agente) throws SQLException {
 		boolean resul = false;
 		String sql = SQL_INSERT;
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
 			pst.setDouble(1, m.getImporte());
 			pst.setString(2, m.getConcepto());
 			pst.setLong(3, m.getCoche().getId());
@@ -109,6 +110,11 @@ public class MultaDAO {
 
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
+				ResultSet rs = pst.getGeneratedKeys();
+				if (rs.next()) {
+				    long id  = rs.getLong(1);
+				    m.setId(id);				    
+				}	
 				resul = true;
 			}
 		}
