@@ -5,6 +5,7 @@ public class Mensaje {
 	public static final String TIPO_SUCCESS ="success";
 	public static final String TIPO_DANGER ="danger";
 	public static final String TIPO_WARNING ="warning";
+	public static final String TIPO_INFO ="info";
 	
 	private String texto;
 	private String tipo;
