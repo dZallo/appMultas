@@ -12,11 +12,11 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarCollapse">
 						<ul class="navbar-nav mr-auto">
-							<li class="nav-item"><a class="btn btn-secondary btn-block m-1" href="matricula">
+							<li class="nav-item"><a class="btn btn-secondary btn-block m-2" href="matricula">
 									Multar</a></li>
-							<li class="nav-item"><a class="btn btn-secondary btn-block m-1" href="listado">Ver
+							<li class="nav-item"><a class="btn btn-secondary btn-block m-2" href="listado">Ver
 									Multas</a></li>
-							<li class="nav-item"><a class="btn btn-secondary btn-block m-1" href="multa?op=4">Ver
+							<li class="nav-item"><a class="btn btn-secondary btn-block m-2" href="multa?op=4">Ver
 									Multas Anuladas</a></li>
 						</ul>
 					</div>
