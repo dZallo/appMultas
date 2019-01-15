@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -18,6 +19,7 @@ import org.apache.log4j.Logger;
 
 import com.ipartek.appMultas.modelo.dao.CocheDAO;
 import com.ipartek.appMultas.modelo.dao.MultaDAO;
+import com.ipartek.appMultas.modelo.pojo.Agente;
 import com.ipartek.appMultas.modelo.pojo.Coche;
 import com.ipartek.appMultas.modelo.pojo.Mensaje;
 import com.ipartek.appMultas.modelo.pojo.Multa;
@@ -105,7 +107,12 @@ public class AltaMultaController extends HttpServlet {
 			} else {
 				// Correcto: Insert en la DB
 				daoMulta.insert(m, idAgente);
-				LOG.info("Multa creada :" + m.toString());
+				
+				HttpSession session = request.getSession();
+				Agente agenteSesion= (Agente) session.getAttribute("agenteLogueado");
+				
+				LOG.info("Multa creada :" + m.toString() + ". Por el agente: " + agenteSesion.toString());
+				
 				// Crear mensaje
 				request.setAttribute("mensaje", new Mensaje(Mensaje.TIPO_SUCCESS, "Multa registrada correctamente."));
 				// Volver a index

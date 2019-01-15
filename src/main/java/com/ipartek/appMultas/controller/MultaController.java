@@ -114,10 +114,16 @@ public class MultaController extends HttpServlet {
 	private void darDeBaja(HttpServletRequest request) {
 		try {
 			daoMulta.darBajaMulta(id);
+			
 			listadoBaja(request);
 			alerta.setTipo(Mensaje.TIPO_SUCCESS);
 			alerta.setTexto("Se ha anulado la multa correctamente. ");
 			request.setAttribute("mensaje", alerta);
+			
+			//recupero la multa que se ha dado de baja para mostrarla en el log
+			Multa mDeBaja= daoMulta.getById(id);
+			LOG.info("Se ha dado de baja la multa :"+ mDeBaja.toString());
+			
 		} catch (SQLException e) {
 			LOG.error(e);
 			alerta.setTipo(Mensaje.TIPO_DANGER);

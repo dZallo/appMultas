@@ -21,7 +21,7 @@ public class MultaDAO {
 			+ "ORDER BY fecha_alta DESC ";
 
 	private final static String SQL_GETBYID = "SELECT m.id AS id_multa, importe, concepto, fecha_alta ,id_coche, c.matricula, c.modelo, c.km"
-			+ "	FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE m.id=? AND fecha_baja IS NULL ORDER BY fecha_alta DESC";
+			+ "	FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE m.id=?  ORDER BY fecha_alta DESC";
 
 	private final static String SQL_INSERT = "INSERT INTO multa (importe,concepto,id_coche,id_agente) VALUES(?,?,?,?);";
 	private final static String SQL_UPDATE_FECHA_BAJA = "UPDATE multa SET fecha_baja=CURRENT_TIMESTAMP() WHERE id =?";
@@ -130,6 +130,7 @@ public class MultaDAO {
 			int affectedRows = pst.executeUpdate();
 			if (affectedRows == 1) {
 				result = true;
+				
 			}
 		}
 

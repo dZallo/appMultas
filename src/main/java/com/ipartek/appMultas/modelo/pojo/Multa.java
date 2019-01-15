@@ -18,6 +18,7 @@ public class Multa {
 	@Size(min = 10, max = 255)
 	private String concepto;
 	private Timestamp fecha;
+	private Timestamp fecha_baja;
 	private Coche coche;
 
 	public Multa() {
@@ -28,7 +29,6 @@ public class Multa {
 	public Multa(Long id, Double importe, String concepto, Timestamp fecha, Coche coche) {
 		this();
 		setId(id);
-		;
 		setImporte(importe);
 		setConcepto(concepto);
 		setFecha(fecha);
@@ -74,6 +74,15 @@ public class Multa {
 
 	public void setCoche(Coche coche) {
 		this.coche = coche;
+	}
+	
+
+	public Timestamp getFecha_baja() {
+		return fecha_baja;
+	}
+
+	public void setFecha_baja(Timestamp fecha_baja) {
+		this.fecha_baja = fecha_baja;
 	}
 
 	@Override
@@ -127,8 +136,9 @@ public class Multa {
 
 	@Override
 	public String toString() {
-		return "Multa [id=" + id + ", importe=" + importe + ", concepto=" + concepto + ", fecha=" + fecha + ", coche="
-				+ coche + "]";
+		return "Multa [id=" + id + ", importe=" + importe + ", concepto=" + concepto + ", fecha=" + fecha
+				+ ", fecha_baja=" + fecha_baja + ", coche=" + coche + "]";
 	}
+
 
 }
