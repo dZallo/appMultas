@@ -3,7 +3,7 @@
 <%@include file="includes/mensajes.jsp" %>
 
 <main role="main" class="inner cover">
-    <h1 class="cover-heading">Multas anuladas</h1>
+    <h3 class="cover-heading">Multas anuladas</h3>
     
     
 <table id="tabla_multas" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">

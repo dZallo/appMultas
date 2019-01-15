@@ -3,8 +3,9 @@
 		<header class="masthead mb-auto">
 			<div class="inner">
 				<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-					<h3 class="masthead-brand">
-						<a href="index"><img src="img/fee64.png"></a>${sessionScope.agenteLogueado.nombre}</h3>
+					<h1 class="masthead-brand">
+						<a href="index"><img src="img/fee64.png"></a><small>${sessionScope.agenteLogueado.nombre}</small>
+					</h1>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarCollapse" aria-controls="navbarCollapse"
 						aria-expanded="false" aria-label="Toggle navigation">
