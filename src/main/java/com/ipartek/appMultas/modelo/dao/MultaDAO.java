@@ -20,7 +20,7 @@ public class MultaDAO {
 			+ " FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE id_agente=? AND m.fecha_baja IS NOT NULL "
 			+ "ORDER BY fecha_alta DESC ";
 
-	private final static String SQL_GETBYID = "SELECT m.id AS id_multa, importe, concepto, fecha_alta ,id_coche, c.matricula, c.modelo, c.km"
+	private final static String SQL_GETBYID = "SELECT m.id AS id_multa, importe, concepto, fecha_alta, fecha_baja, id_coche, c.matricula, c.modelo, c.km"
 			+ "	FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE m.id=?  ORDER BY fecha_alta DESC";
 
 	private final static String SQL_INSERT = "INSERT INTO multa (importe,concepto,id_coche,id_agente) VALUES(?,?,?,?);";
@@ -50,7 +50,7 @@ public class MultaDAO {
 			pst.setLong(1, idMulta);
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
-					m = rowMapper(rs);
+					m = rowMapperBaja(rs);
 				}
 			}
 

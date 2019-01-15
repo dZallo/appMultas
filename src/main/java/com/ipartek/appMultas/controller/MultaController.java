@@ -140,7 +140,7 @@ public class MultaController extends HttpServlet {
 	}
 
 	private void irFormulario(HttpServletRequest request) {
-		vista = "multa.jsp";
+		vista = "detalle.jsp";
 		Multa m = new Multa();
 
 		if (id > 0) {

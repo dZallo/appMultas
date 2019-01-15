@@ -12,11 +12,11 @@
   	</div>
   	<div class="form-group">
 	    <label for="importe">Importe</label>
-	    <input type="number" class="form-control" id="importe" name="importe" aria-describedby="importeHelp" placeholder="P.E: 300" value="${importe}" autofocus step="any">
+	    <input type="number" class="form-control" id="importe" name="importe" aria-describedby="importeHelp" placeholder="P.E: 300" value="${importe}" autofocus step="any" required>
   	</div>
   	<div class="form-group">
 	    <label for="concepto">Concepto</label>
-	    <textarea class="form-control" id="concepto" name="concepto" aria-describedby="importeHelp" placeholder="Motivo de la sanción">${concepto}</textarea>
+	    <textarea class="form-control" id="concepto" name="concepto" aria-describedby="importeHelp" placeholder="Motivo de la sanción" required>${concepto}</textarea>
   	</div>
   	<div class="form-group">
 	    <input type="hidden" id="id_coche" name="id_coche" value="${coche.id }">

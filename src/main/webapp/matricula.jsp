@@ -8,7 +8,7 @@
     <form action="matricula" method="POST">
     <div class="form-group">
     <input type="text" class="form-control" id="matriculaCoche" name="matriculaCoche" 
-    	aria-describedby="matriculaHelp" placeholder="P.E: 1234AAA" value ="${matricula}" autofocus>
+    	aria-describedby="matriculaHelp" placeholder="P.E: 1234AAA" value ="${matricula}" autofocus required>
   	</div>
       <button type="submit" class="btn btn-lg btn-secondary btn-block">Buscar</button>
   	</form>
