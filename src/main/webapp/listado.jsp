@@ -23,7 +23,7 @@
   </tbody>
 </table>
 <p class="lead">
-<a href="multa?op=4" class="btn btn-lg btn-warning">Listado de Bajas</a>
+<a href="multa?op=4" class="btn btn-lg btn-warning btn-block">Listado de Bajas</a>
 </p>
     
 <%@include file="includes/pie.jsp" %>

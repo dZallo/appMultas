@@ -22,7 +22,7 @@
 	    <input type="hidden" id="id_coche" name="id_coche" value="${coche.id }">
 	    <input type="hidden" id="id_agente" name="id_agente"  value="${sessionScope.agenteLogueado.id }">
   	</div>
-      <button type="submit" class="btn btn-lg btn-secondary">Crear</button>
+      <button type="submit" class="btn btn-lg btn-secondary btn-block">Crear</button>
   	</form>
     
 <%@include file="includes/pie.jsp" %>

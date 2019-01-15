@@ -12,10 +12,10 @@
     <h1 class="cover-heading"><i class="material-icons" style="font-size:114px;">directions_car</i></h1>
     <p class="lead">Seleccione la acción a realizar: </p>
     <p class="lead">
-      <a href="matricula" class="btn btn-lg btn-secondary">Multar</a>
+      <a href="matricula" class="btn btn-lg btn-secondary btn-block">Multar</a>
     </p>
     <p class="lead">
-      <a href="listado" class="btn btn-lg btn-secondary">Ver Multas</a>
+      <a href="listado" class="btn btn-lg btn-secondary btn-block">Ver Multas</a>
     </p>
 <%@include file="includes/mensajes.jsp" %>
 <%@include file="includes/pie.jsp" %>

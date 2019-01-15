@@ -28,7 +28,7 @@
 </table>
 
 <p class="lead">
-<a href="listado" class="btn btn-lg btn-info">Listado de multas</a>
+<a href="listado" class="btn btn-lg btn-info btn-block">Listado de multas</a>
 </p>
     
 <%@include file="includes/pie.jsp" %>

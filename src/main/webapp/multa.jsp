@@ -24,7 +24,7 @@
 
   	<p class="lead">
       <!-- Button to Open the Modal -->
-	<button type="button" class="btn btn-lg btn-warning" data-toggle="modal" data-target="#myModal">
+	<button type="button" class="btn btn-lg btn-warning btn-block" data-toggle="modal" data-target="#myModal">
 	 Anular multa
 	</button>
 
@@ -54,7 +54,7 @@
 		</div>
     </p>
   	<p class="lead">
-  	  <a href="listado" class="btn btn-lg btn-info">Volver al listado</a>
+  	  <a href="listado" class="btn btn-lg btn-info btn-block">Volver al listado</a>
   	</p>
   </form>
     
