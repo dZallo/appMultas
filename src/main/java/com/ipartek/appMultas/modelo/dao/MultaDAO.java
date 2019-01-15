@@ -16,7 +16,7 @@ public class MultaDAO {
 
 	private final static String SQL_GETALLBYIDAGENTE = "SELECT m.id AS id_multa, importe, concepto, fecha_alta ,id_agente,id_coche, c.matricula, c.modelo, c.km"
 			+ " FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE id_agente=? AND fecha_baja IS NULL ORDER BY fecha_alta DESC";
-	private final static String SQL_GETALLBYIDAGENTE_BAJA = "SELECT m.id AS id_multa, importe, concepto, fecha_alta ,id_agente,id_coche, c.matricula, c.modelo, c.km"
+	private final static String SQL_GETALLBYIDAGENTE_BAJA = "SELECT m.id AS id_multa, importe, concepto, fecha_alta,fecha_baja ,id_agente,id_coche, c.matricula, c.modelo, c.km"
 			+ " FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE id_agente=? AND m.fecha_baja IS NOT NULL "
 			+ "ORDER BY fecha_alta DESC ";
 
@@ -88,7 +88,7 @@ public class MultaDAO {
 			pst.setLong(1, idAgente);
 			try (ResultSet rs = pst.executeQuery()) {
 				while (rs.next()) {
-					m = rowMapper(rs);
+					m = rowMapperBaja(rs);
 					multasAgente.put(m.getId(), m);
 				}
 			}
@@ -98,6 +98,7 @@ public class MultaDAO {
 
 		return multasAgente;
 	}
+
 
 	public boolean insert(Multa m, Long id_agente) throws SQLException {
 		boolean resul = false;
@@ -148,4 +149,18 @@ public class MultaDAO {
 				new Coche(rs.getLong("id_coche"), rs.getString("matricula"), rs.getString("modelo"), rs.getLong("km")));
 		return m;
 	}
+	
+	private Multa rowMapperBaja(ResultSet rs) throws SQLException {
+		Multa m = new Multa();
+		m.setId(rs.getLong("id_multa"));
+		m.setConcepto(rs.getString("concepto"));
+		m.setImporte(rs.getDouble("importe"));
+		m.setFecha(rs.getTimestamp("fecha_alta"));
+		m.setFecha_baja(rs.getTimestamp("fecha_baja"));
+		// Seteo el coche
+		m.setCoche(
+				new Coche(rs.getLong("id_coche"), rs.getString("matricula"), rs.getString("modelo"), rs.getLong("km")));
+		return m;
+	}
+
 }

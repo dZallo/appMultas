@@ -10,18 +10,14 @@
         <thead>
 		    <tr>
 		      <th scope="col">Matrícula</th>
-		      <th scope="col">Fecha</th>
-		      <th scope="col">Concepto</th>
-		      <th scope="col">Importe</th>
+		      <th scope="col">Fecha Baja</th>
 		    </tr>
 	  </thead>
   <tbody>
   <c:forEach items="${multas}" var="multa">
     <tr>
       <th scope="row">${multa.value.coche.matricula}</th>
-      <td>${multa.value.fecha}</td>
-      <td>${multa.value.concepto}</td>
-      <td>${multa.value.importe}&euro;</td>
+      <td><a href="multa?op=2&id=${multa.key}">${multa.value.fecha_baja}</a></td>
     </tr>
     </c:forEach>
   </tbody>
