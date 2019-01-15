@@ -1,19 +1,25 @@
 <%@include file="includes/cabecera.jsp" %>
 <%@include file="includes/menu.jsp" %>
 
-<main role="main" class="inner cover">
-   <h1 class="cover-heading">Detalle multa</h1>
-     	
-	<p><strong>Matrícula: </strong>${multa.coche.matricula}</p>
-	<p><strong>Modelo: </strong>${multa.coche.modelo}</p>
-  	<p><strong>Importe: </strong>${multa.importe}</p>
-  	<p><strong>Concepto: </strong>${multa.concepto}</p>
-  	<p><strong>Fecha alta: </strong>${multa.fecha}</p>
-
+<main role="main" class="inner cover ">
+<div class="border border-white pr-2 pl-2 rounded">
+   <h3 class="cover-heading text-left ">Detalle multa</h3>
+    
+	<p class="text-left"><strong>Matrícula: </strong>${multa.coche.matricula}</p>
+	<p class="text-left"><strong>Modelo: </strong>${multa.coche.modelo}</p>
+  	<p class="text-left"><strong>Importe: </strong>${multa.importe}</p>
+  	<p class="text-left"><strong>Fecha alta: </strong>${multa.fecha}</p>
     <c:if test="${multa.fecha_baja!=null}">
-        <p><strong>Fecha baja: </strong>${multa.fecha_baja}</p>
-    </c:if>    
-
+        <p class="text-left"><strong>Fecha baja: </strong>${multa.fecha_baja}</p>
+    </c:if>  
+   
+	<p class="text-left ">
+		<strong>Concepto: </strong>  
+		<span class=" text-left">  
+			${multa.concepto}	
+		</span>
+	</p>
+</div>
 
   	<div class="form-group">
 	    <input type="hidden" id="id_coche" name="id_coche" value="${multa.coche.id }">
