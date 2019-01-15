@@ -5,6 +5,7 @@
    <h1 class="cover-heading">Detalle multa</h1>
      	
 	<p><strong>Matrícula: </strong>${multa.coche.matricula}</p>
+	<p><strong>Modelo: </strong>${multa.coche.modelo}</p>
   	<p><strong>Importe: </strong>${multa.importe}</p>
   	<p><strong>Concepto: </strong>${multa.concepto}</p>
   	<p><strong>Fecha alta: </strong>${multa.fecha}</p>
