@@ -21,31 +21,37 @@
 	    <input type="hidden" id="id_coche" name="id_coche" value="${multa.coche.id }">
 	    <input type="hidden" id="id_agente" name="id_agente"  value="${sessionScope.agenteLogueado.id }">
   	</div>
-  	
-  	
-  	<div class="myModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Atención!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Estás seguro de que deseas anular la multa?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <a href="multa?op=3&id=${multa.id}" class="btn btn-lg btn-warning">Anular multa</a>
-      </div>
-    </div>
-  </div>
-</div>
-  	
-  	
+
   	<p class="lead">
-      <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">Anular multa</button>
+      <!-- Button to Open the Modal -->
+	<button type="button" class="btn btn-lg btn-warning" data-toggle="modal" data-target="#myModal">
+	 Anular multa
+	</button>
+
+		<!-- The Modal -->
+		<div class="modal text-body" id="myModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">Atención!</h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body">
+		        Estás segur@ de que deseas anular la multa?
+		      </div>
+		
+		      <!-- Modal footer -->
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+	        	<a href="multa?op=3&id=${multa.id}" class="btn btn-success">Confirmar</a>	      
+		      </div>
+		    </div>
+		  </div>
+		</div>
     </p>
   	<p class="lead">
   	  <a href="listado" class="btn btn-lg btn-info">Volver al listado</a>
