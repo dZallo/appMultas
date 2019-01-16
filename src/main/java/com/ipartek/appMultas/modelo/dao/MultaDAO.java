@@ -1,10 +1,9 @@
 package com.ipartek.appMultas.modelo.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
@@ -14,17 +13,13 @@ import com.ipartek.appMultas.modelo.pojo.Multa;
 
 public class MultaDAO {
 
-	private final static String SQL_GETALLBYIDAGENTE = "SELECT m.id AS id_multa, importe, concepto, fecha_alta ,id_agente,id_coche, c.matricula, c.modelo, c.km"
-			+ " FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE id_agente=? AND fecha_baja IS NULL ORDER BY fecha_alta DESC";
-	private final static String SQL_GETALLBYIDAGENTE_BAJA = "SELECT m.id AS id_multa, importe, concepto, fecha_alta,fecha_baja ,id_agente,id_coche, c.matricula, c.modelo, c.km"
-			+ " FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE id_agente=? AND m.fecha_baja IS NOT NULL "
-			+ "ORDER BY fecha_alta DESC ";
+	private final static String SQL_GETALLBYIDAGENTE = "{call multa_getAllByIdAgente(?)}";
+	private final static String SQL_GETALLBYIDAGENTE_BAJA = "{call multa_getAllByIdAgenteBaja(?)}";
 
-	private final static String SQL_GETBYID = "SELECT m.id AS id_multa, importe, concepto, fecha_alta, fecha_baja, id_coche, c.matricula, c.modelo, c.km"
-			+ "	FROM multa AS m INNER JOIN coche AS c ON m.id_coche= c.id WHERE m.id=?  ORDER BY fecha_alta DESC";
+	private final static String SQL_GETBYID = "{call multa_getById(?)}";
 
-	private final static String SQL_INSERT = "INSERT INTO multa (importe,concepto,id_coche,id_agente) VALUES(?,?,?,?);";
-	private final static String SQL_UPDATE_FECHA_BAJA = "UPDATE multa SET fecha_baja=CURRENT_TIMESTAMP() WHERE id =?";
+	private final static String SQL_INSERT = "{multa_insert(?,?,?,?,?)}";
+	private final static String SQL_UPDATE_FECHA_BAJA = "{call multa_updateFechaBaja(?)}";
 
 	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
 	private static MultaDAO INSTANCE = null;
@@ -46,9 +41,11 @@ public class MultaDAO {
 		Multa m = new Multa();
 
 		String sql = SQL_GETBYID;
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
-			pst.setLong(1, idMulta);
-			try (ResultSet rs = pst.executeQuery()) {
+		try (Connection conn = ConnectionManager.getConnection(); 
+			CallableStatement cs = conn.prepareCall(sql);
+			){
+			cs.setLong(1, idMulta);
+			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) {
 					m = rowMapperBaja(rs);
 				}
@@ -65,9 +62,10 @@ public class MultaDAO {
 		HashMap<Long, Multa> multasAgente = new HashMap<>();
 		Multa m = new Multa();
 		String sql = SQL_GETALLBYIDAGENTE;
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
-			pst.setLong(1, idAgente);
-			try (ResultSet rs = pst.executeQuery()) {
+		try (Connection conn = ConnectionManager.getConnection();
+			CallableStatement cs = conn.prepareCall(sql);) {
+			cs.setLong(1, idAgente);
+			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) {
 					m = rowMapper(rs);
 					multasAgente.put(m.getId(), m);
@@ -84,9 +82,11 @@ public class MultaDAO {
 		HashMap<Long, Multa> multasAgente = new HashMap<>();
 		Multa m = new Multa();
 		String sql = SQL_GETALLBYIDAGENTE_BAJA;
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
-			pst.setLong(1, idAgente);
-			try (ResultSet rs = pst.executeQuery()) {
+		try (Connection conn = ConnectionManager.getConnection(); 
+			CallableStatement cs = conn.prepareCall(sql);
+			){
+			cs.setLong(1, idAgente);
+			try (ResultSet rs = cs.executeQuery()) {
 				while (rs.next()) {
 					m = rowMapperBaja(rs);
 					multasAgente.put(m.getId(), m);
@@ -103,32 +103,43 @@ public class MultaDAO {
 	public boolean insert(Multa m, Long id_agente) throws SQLException {
 		boolean resul = false;
 		String sql = SQL_INSERT;
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
-			pst.setDouble(1, m.getImporte());
-			pst.setString(2, m.getConcepto());
-			pst.setLong(3, m.getCoche().getId());
-			pst.setLong(4, id_agente);
+		try (Connection conn = ConnectionManager.getConnection(); 
+			CallableStatement cs = conn.prepareCall(sql);
+			) {
+			//parametros de entrada
+			cs.setDouble(1, m.getImporte());
+			cs.setString(2, m.getConcepto());
+			cs.setLong(3, m.getCoche().getId());
+			cs.setLong(4, id_agente);
+			
+			//parametros de salida
+			cs.registerOutParameter(5, 3);
 
-			int affectedRows = pst.executeUpdate();
+			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
-				ResultSet rs = pst.getGeneratedKeys();
-				if (rs.next()) {
-				    long id  = rs.getLong(1);
-				    m.setId(id);				    
-				}	
+				// conseguir id generado
+				m.setId(cs.getLong(5));
 				resul = true;
 			}
 		}
 		return resul;
 	}
 
+	/**
+	 * Este metodo actualiza el atributo fecha_baja, por lo tanto al tener un dato en dicho campo significará que la multa se ha dado de baja
+	 * @param id
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean darBajaMulta(Long id) throws SQLException {
 		boolean result = false;
 		String sql = SQL_UPDATE_FECHA_BAJA;
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
-			pst.setLong(1, id);
+		try (Connection conn = ConnectionManager.getConnection(); 
+			CallableStatement cs = conn.prepareCall(sql);
+			){
+			cs.setLong(1, id);
 
-			int affectedRows = pst.executeUpdate();
+			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
 				result = true;
 				

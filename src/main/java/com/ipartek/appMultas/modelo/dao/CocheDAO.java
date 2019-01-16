@@ -1,7 +1,7 @@
 package com.ipartek.appMultas.modelo.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -11,8 +11,8 @@ import com.ipartek.appMultas.modelo.pojo.Coche;
 
 public class CocheDAO {
 
-	private final static String SQL_GETBYMATRICULA = "SELECT c.id, c.matricula, c.modelo, c.km FROM coche AS c WHERE c.matricula =?;";
-	private final static String SQL_GETBYID = "SELECT c.id, c.matricula, c.modelo, c.km FROM coche AS c WHERE c.id =?;";
+	private final static String SQL_GETBYMATRICULA = "{call coche_getByMatricula(?)}";
+	private final static String SQL_GETBYID = "{call coche_getById(?)}";
 
 	private final static Logger LOG = Logger.getLogger(CocheDAO.class);
 	private static CocheDAO INSTANCE = null;
@@ -35,9 +35,11 @@ public class CocheDAO {
 
 		String sql = SQL_GETBYMATRICULA;
 
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
-			pst.setString(1, matricula);
-			try (ResultSet rs = pst.executeQuery();) {
+		try (Connection conn = ConnectionManager.getConnection(); 
+			CallableStatement cs = conn.prepareCall(sql);
+			){
+			cs.setString(1, matricula);
+			try (ResultSet rs = cs.executeQuery();) {
 				while (rs.next()) {
 					c = rowMapper(rs);
 				}
@@ -55,9 +57,11 @@ public class CocheDAO {
 
 		String sql = SQL_GETBYID;
 
-		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
-			pst.setLong(1, id);
-			try (ResultSet rs = pst.executeQuery();) {
+		try (Connection conn = ConnectionManager.getConnection(); 
+			CallableStatement cs = conn.prepareCall(sql);
+			){
+			cs.setLong(1, id);
+			try (ResultSet rs = cs.executeQuery();) {
 				while (rs.next()) {
 					c = rowMapper(rs);
 				}
