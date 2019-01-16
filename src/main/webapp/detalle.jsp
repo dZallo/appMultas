@@ -7,7 +7,7 @@
     
 	<p class="text-left"><strong>Matrícula: </strong>${multa.coche.matricula}</p>
 	<p class="text-left"><strong>Modelo: </strong>${multa.coche.modelo}</p>
-  	<p class="text-left"><strong>Importe: </strong>${multa.importe}</p>
+  	<p class="text-left"><strong>Importe: </strong>${multa.importe}&euro;</p>
   	<p class="text-left"><strong>Fecha alta: </strong>${multa.fecha}</p>
     <c:if test="${multa.fecha_baja!=null}">
         <p class="text-left"><strong>Fecha baja: </strong>${multa.fecha_baja}</p>
