@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `dgt` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `dgt`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: localhost    Database: dgt
+-- Host: 127.0.0.1    Database: dgt
 -- ------------------------------------------------------
 -- Server version	8.0.12
 
@@ -117,7 +117,7 @@ CREATE TABLE `multa` (
   KEY `fk_multas_agentes_idx` (`id_agente`),
   CONSTRAINT `fk_multas_agentes` FOREIGN KEY (`id_agente`) REFERENCES `agente` (`id`),
   CONSTRAINT `fk_multas_coches` FOREIGN KEY (`id_coche`) REFERENCES `coche` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,13 +126,199 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (1,3,3,200,'por feo','2019-01-07 10:36:52',NULL,NULL),(2,6,1,500,'exceso velocidad 240km/h','2019-01-07 10:38:46',NULL,NULL),(3,1,2,700,'por empinar codo 8.0','2018-12-31 22:40:52',NULL,NULL),(4,1,2,700,'por empinar codo 8.0','2019-01-07 10:41:55',NULL,NULL),(5,1,1,1400,'por ir a200k/h en zona de 30km/h','2019-01-07 12:40:21',NULL,NULL),(6,3,3,200,'por no cambiar el coche (feo)','2019-01-07 12:40:40',NULL,NULL),(7,1,1,500,'Pasar semáforo en rojo','2019-01-09 13:25:34',NULL,'2019-01-14 12:49:19'),(8,6,1,90,'Hacerme una peineta','2019-01-09 13:27:19',NULL,NULL),(9,6,1,1000,'Aparcar donde no debe','2019-01-09 13:29:00',NULL,NULL),(10,1,1,3000,'Muuu malo','2019-01-09 13:47:28',NULL,NULL),(11,1,1,1,'Objeto no identificado: sdafdsfsafd','2019-01-09 13:48:03',NULL,NULL),(12,1,1,2,'Me ha rayado el buga','2019-01-09 13:49:56',NULL,NULL),(13,1,1,3,'Me a hecho un calvo','2019-01-09 13:50:13',NULL,NULL),(14,6,1,200,'Me ha llamado \"Sr. Anacardo\"','2019-01-09 13:50:42',NULL,NULL),(15,6,1,2,'Me quería dar propina','2019-01-09 13:51:19',NULL,NULL),(16,1,1,300,'Se ha pasado de velocidad','2019-01-09 14:17:42',NULL,NULL),(17,1,1,500,'Ha excedido el límite de velocidad, 20km/h','2019-01-10 12:12:51',NULL,NULL),(18,6,1,2000000,'Manoloooooooooo','2019-01-11 10:30:55',NULL,NULL),(19,6,1,300,'sadsadasdadadsadasda','2019-01-11 10:49:52',NULL,NULL),(20,6,1,3000,'Se ha puesto a quemar ruedaca de la buena','2019-01-11 11:58:22',NULL,'2019-01-11 12:47:00'),(21,1,1,300,'Multon por ir to´cocido','2019-01-11 14:10:07',NULL,'2019-01-11 14:10:20'),(22,6,1,50,'Iba 20km/h por encima en una zona de 120','2019-01-14 12:51:03',NULL,'2019-01-14 12:59:34'),(23,1,1,21,'Sanción nos faltan decimales.Porque es más feo que un ñu','2019-01-14 12:57:11',NULL,'2019-01-14 12:58:40'),(24,6,1,200,'Se ha saltado un semaforo en rojo','2019-01-14 13:09:16',NULL,NULL),(25,1,1,49.99,'Por petardo','2019-01-14 14:09:39',NULL,NULL),(26,6,1,56.66,'Ander se ha saltado un STOP','2019-01-14 14:23:25',NULL,NULL),(27,6,1,300,'Va con las luces de atrás fundidas Va con las luces de atrás fundidas Va con las luces de atrás fundidas Va con las luces de atrás fundidas Va con las luces de atrás fundidas Va con las luces de atrás fundidas Va con las luces de atrás fundidas ','2019-01-15 10:41:15',NULL,'2019-01-15 11:53:23'),(28,1,1,222,'Se ha saltado un Stop\r\n','2019-01-15 10:55:27',NULL,'2019-01-15 10:58:25'),(29,1,1,2000,'Stop y semaforo en rojo','2019-01-15 11:36:51',NULL,'2019-01-15 11:36:57');
+INSERT INTO `multa` VALUES (1,3,3,200,'por feo','2019-01-07 10:36:52',NULL,NULL),(2,6,1,500,'exceso velocidad 240km/h','2019-01-07 10:38:46',NULL,NULL),(3,1,2,700,'por empinar codo 8.0','2018-12-31 22:40:52',NULL,NULL),(4,1,2,700,'por empinar codo 8.0','2019-01-07 10:41:55',NULL,NULL),(5,1,1,1400,'por ir a200k/h en zona de 30km/h','2019-01-07 12:40:21',NULL,NULL),(6,3,3,200,'por no cambiar el coche (feo)','2019-01-07 12:40:40',NULL,NULL),(7,1,1,500,'Pasar semáforo en rojo','2019-01-09 13:25:34',NULL,'2019-01-14 12:49:19'),(8,6,1,90,'Hacerme una peineta','2019-01-09 13:27:19',NULL,NULL),(9,6,1,1000,'Aparcar donde no debe','2019-01-09 13:29:00',NULL,NULL),(10,1,1,3000,'Muuu malo','2019-01-09 13:47:28',NULL,NULL),(11,1,1,1,'Objeto no identificado: sdafdsfsafd','2019-01-09 13:48:03',NULL,NULL),(12,1,1,2,'Me ha rayado el buga','2019-01-09 13:49:56',NULL,NULL),(13,1,1,3,'Me a hecho un calvo','2019-01-09 13:50:13',NULL,NULL),(14,6,1,200,'Me ha llamado \"Sr. Anacardo\"','2019-01-09 13:50:42',NULL,NULL),(15,6,1,2,'Me quería dar propina','2019-01-09 13:51:19',NULL,NULL),(16,1,1,300,'Se ha pasado de velocidad','2019-01-09 14:17:42',NULL,NULL),(17,1,1,500,'Ha excedido el límite de velocidad, 20km/h','2019-01-10 12:12:51',NULL,NULL),(18,6,1,2000000,'Manoloooooooooo','2019-01-11 10:30:55',NULL,NULL),(19,6,1,300,'sadsadasdadadsadasda','2019-01-11 10:49:52',NULL,NULL),(20,6,1,3000,'Se ha puesto a quemar ruedaca de la buena','2019-01-11 11:58:22',NULL,'2019-01-11 12:47:00'),(21,1,1,300,'Multon por ir to´cocido','2019-01-11 14:10:07',NULL,'2019-01-11 14:10:20'),(22,6,1,50,'Iba 20km/h por encima en una zona de 120','2019-01-14 12:51:03',NULL,'2019-01-14 12:59:34'),(23,1,1,21,'Sanción nos faltan decimales.Porque es más feo que un ñu','2019-01-14 12:57:11',NULL,'2019-01-14 12:58:40'),(24,6,1,200,'Se ha saltado un semaforo en rojo','2019-01-14 13:09:16',NULL,NULL),(25,1,1,49.99,'Por petardo','2019-01-14 14:09:39',NULL,NULL),(26,6,1,56.66,'Ander se ha saltado un STOP','2019-01-14 14:23:25',NULL,NULL),(27,6,1,300,'Va con las luces de atrás fundidas Va con las luces de atrás fundidas Va con las luces de atrás fundidas Va con las luces de atrás fundidas Va con las luces de atrás fundidas Va con las luces de atrás fundidas Va con las luces de atrás fundidas ','2019-01-15 10:41:15',NULL,'2019-01-15 11:53:23'),(28,1,1,222,'Se ha saltado un Stop\r\n','2019-01-15 10:55:27',NULL,'2019-01-15 10:58:25'),(29,1,1,2000,'Stop y semaforo en rojo','2019-01-15 11:36:51',NULL,'2019-01-15 11:36:57'),(30,1,1,250,'Por aparcar en zona de carga-descarga','2019-01-16 09:21:31',NULL,'2019-01-16 09:23:24');
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'dgt'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `agente_getById` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agente_getById`(IN p_idAgente long)
+BEGIN
+	SELECT id, nombre, placa, id_departamento FROM agente WHERE id=p_idAgente;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `coche_getById` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `coche_getById`(IN p_idCoche long)
+BEGIN
+	SELECT c.id, c.matricula, c.modelo, c.km FROM coche AS c WHERE c.id =p_idCoche;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `coche_getByMatricula` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `coche_getByMatricula`(IN p_matriculaCoche VARCHAR(10))
+BEGIN
+	SELECT c.id, c.matricula, c.modelo, c.km FROM coche AS c WHERE c.matricula =p_matriculaCoche;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `multa_getAllByIdAgente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `multa_getAllByIdAgente`(IN p_idAgente long)
+BEGIN
+	SELECT m.id AS id_multa,
+		importe, concepto, fecha_alta, 
+		id_agente,id_coche, c.matricula,
+		c.modelo, c.km 
+	FROM multa AS m 
+    INNER JOIN coche AS c 
+    ON m.id_coche= c.id 
+    WHERE id_agente=p_idAgente 
+    AND fecha_baja IS NULL 
+    ORDER BY fecha_alta DESC;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `multa_getAllByIdAgenteBaja` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `multa_getAllByIdAgenteBaja`(IN p_idAgente long)
+BEGIN
+	SELECT m.id AS id_multa, 
+		importe, concepto, 
+        fecha_alta, fecha_baja, 
+        id_agente, id_coche, 
+        c.matricula, c.modelo, c.km
+	FROM multa AS m 
+    INNER JOIN coche AS c 
+    ON m.id_coche= c.id 
+    WHERE id_agente=p_idAgente 
+    AND m.fecha_baja IS NOT NULL 
+	ORDER BY fecha_alta DESC ;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `multa_getById` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `multa_getById`(IN p_idMulta long)
+BEGIN
+	SELECT m.id AS id_multa,
+		importe, concepto, 
+        fecha_alta, fecha_baja, 
+        id_coche, c.matricula, 
+        c.modelo, c.km
+	FROM multa AS m 
+    INNER JOIN coche AS c 
+    ON m.id_coche = c.id 
+    WHERE m.id=p_idMulta 
+    ORDER BY fecha_alta DESC;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `multa_insert` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `multa_insert`(IN p_importeMulta float, 
+								 IN p_conceptoMulta VARCHAR(255), 
+                                 IN p_idCoche long, 
+                                 IN p_idAgente long, 
+                                 OUT o_idMulta long)
+BEGIN
+	INSERT INTO multa (importe,concepto,id_coche,id_agente) 
+		   VALUES(p_importeMulta, p_conceptoMulta, p_idCoche, p_idAgente);
+    SET o_idMulta = last_insert_id();
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `multa_updateFechaBaja` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `multa_updateFechaBaja`(IN p_idMulta long)
+BEGIN
+	UPDATE multa SET fecha_baja= CURRENT_TIMESTAMP() WHERE id = p_idMulta;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -143,4 +329,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-15 13:58:00
+-- Dump completed on 2019-01-16  9:25:05
