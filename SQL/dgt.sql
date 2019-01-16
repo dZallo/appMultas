@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `dgt` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `dgt`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: dgt
+-- Host: localhost    Database: dgt
 -- ------------------------------------------------------
 -- Server version	8.0.12
 
@@ -29,6 +29,7 @@ CREATE TABLE `agente` (
   `nombre` varchar(45) NOT NULL,
   `placa` varchar(45) NOT NULL,
   `id_departamento` int(11) DEFAULT NULL,
+  `password` varchar(50) NOT NULL DEFAULT '12345678',
   PRIMARY KEY (`id`),
   KEY `fk_agente_departamento_idx` (`id_departamento`),
   CONSTRAINT `fk_agente_departamento` FOREIGN KEY (`id_departamento`) REFERENCES `departamento` (`id`)
@@ -41,7 +42,7 @@ CREATE TABLE `agente` (
 
 LOCK TABLES `agente` WRITE;
 /*!40000 ALTER TABLE `agente` DISABLE KEYS */;
-INSERT INTO `agente` VALUES (1,'Majonei','1234',39),(2,'Jonny Walker','4321',36),(3,'Monk','7890',38),(4,'Takel Berry','0987',37),(5,'Tontini','5678',37);
+INSERT INTO `agente` VALUES (1,'Majonei','1234',39,'12345678'),(2,'Jonny Walker','4321',36,'12345678'),(3,'Monk','7890',38,'12345678'),(4,'Takel Berry','0987',37,'12345678'),(5,'Tontini','5678',37,'12345678');
 /*!40000 ALTER TABLE `agente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -329,4 +330,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-16  9:25:05
+-- Dump completed on 2019-01-16 10:38:08
