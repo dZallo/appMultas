@@ -2,20 +2,24 @@
 <%@include file="includes/menu.jsp" %>
 <%@include file="includes/mensajes.jsp" %>
 <main role="main" class="inner cover">
-    <h1 class="cover-heading">Registrar multa</h1>
-    <p class="lead">Introduzca la matrícula del vehículo: </p>
+    <h3 class="cover-heading">Registrar multa</h3>
+    <p class="lead"><small>Introduzca la matrícula del vehículo: </small></p>
     
     <form action="altamulta" method="POST">
     <div class="form-group">	    
-	    <label for="matricula">Matrícula</label>
+	    <label for="matricula">Matrícula: </label>
 	    <input type="text" class="form-control" id="matricula" name="matricula" aria-describedby="matriculaHelp" placeholder="P.E: 1234AAA" value="${coche.matricula}" disabled>
   	</div>
+  	<div class="form-group">	    
+	    <label for="modelo">Modelo: </label>
+	    <input type="text" class="form-control" id="modelo" name="modelo" aria-describedby="modeloHelp" placeholder="P.E: Ford Scort" value="${coche.modelo}" disabled>
+  	</div>
   	<div class="form-group">
-	    <label for="importe">Importe</label>
+	    <label for="importe">Importe: </label>
 	    <input type="number" class="form-control" id="importe" name="importe" aria-describedby="importeHelp" placeholder="P.E: 300" value="${importe}" autofocus step="any" required>
   	</div>
   	<div class="form-group">
-	    <label for="concepto">Concepto</label>
+	    <label for="concepto">Concepto: </label>
 	    <textarea class="form-control" id="concepto" name="concepto" aria-describedby="importeHelp" placeholder="Motivo de la sanción" required>${concepto}</textarea>
   	</div>
   	<div class="form-group">
