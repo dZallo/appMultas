@@ -25,14 +25,27 @@
 	    <input type="hidden" id="id_coche" name="id_coche" value="${multa.coche.id }">
 	    <input type="hidden" id="id_agente" name="id_agente"  value="${sessionScope.agenteLogueado.id }">
   	</div>
-	<c:if test="${multa.fecha_baja==null}">
-  	<p class="lead">
-      <!-- Button to Open the Modal -->
-	<button type="button" class="btn btn-lg btn-warning btn-block" data-toggle="modal" data-target="#myModal">
-	 Anular multa
-	</button>
-	</p>
-	</c:if>
+		
+	<c:choose>
+	  <c:when test="${multa.fecha_baja==null}">
+	   <p class="lead">
+	      	<!-- Button to Open the Modal -->
+			<button type="button" class="btn btn-lg btn-warning btn-block" data-toggle="modal" data-target="#myModal">
+			 Anular multa
+			</button>
+		</p>
+	  </c:when>
+	  <c:otherwise>
+	    <p class="lead">
+	      	<!-- Button to Open the Modal -->
+			<button type="button" class="btn btn-lg btn-warning btn-block" data-toggle="modal" data-target="#myModal2">
+			 Des-Anular multa
+			</button>
+		</p>
+	  </c:otherwise>
+	</c:choose>
+	
+	
 		<!-- The Modal -->
 		<div class="modal text-body" id="myModal">
 		  <div class="modal-dialog">
@@ -57,6 +70,33 @@
 		    </div>
 		  </div>
 		</div>
+		
+		
+		<!-- The Modal 2 -->
+		<div class="modal text-body" id="myModal2">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">Atención!</h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <div class="modal-body">
+		        Estás segur@ de que deseas des-anular la multa?
+		      </div>
+		
+		      <!-- Modal footer -->
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+	        	<a href="multa?op=5&id=${multa.id}" class="btn btn-success">Confirmar</a>	      
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
 		<c:choose>
     <c:when test="${multa.fecha_baja==null}">
         <p class="lead">

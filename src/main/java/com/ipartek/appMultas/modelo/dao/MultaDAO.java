@@ -21,6 +21,7 @@ public class MultaDAO {
 
 	private final static String SQL_INSERT = "{call multa_insert(?,?,?,?,?)}";
 	private final static String SQL_UPDATE_FECHA_BAJA = "{call multa_updateFechaBaja(?)}";
+	private final static String SQL_DESANULAR = "{call multa_desAnular(?)}";
 
 	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
 	private static MultaDAO INSTANCE = null;
@@ -135,6 +136,24 @@ public class MultaDAO {
 	public boolean darBajaMulta(Long id) throws SQLException {
 		boolean result = false;
 		String sql = SQL_UPDATE_FECHA_BAJA;
+		try (Connection conn = ConnectionManager.getConnection(); 
+			CallableStatement cs = conn.prepareCall(sql);
+			){
+			cs.setLong(1, id);
+
+			int affectedRows = cs.executeUpdate();
+			if (affectedRows == 1) {
+				result = true;
+				
+			}
+		}
+
+		return result;
+	}
+	
+	public boolean desAnularMulta(Long id) throws SQLException {
+		boolean result = false;
+		String sql = SQL_DESANULAR;
 		try (Connection conn = ConnectionManager.getConnection(); 
 			CallableStatement cs = conn.prepareCall(sql);
 			){

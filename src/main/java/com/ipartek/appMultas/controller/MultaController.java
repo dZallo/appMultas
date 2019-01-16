@@ -30,6 +30,7 @@ public class MultaController extends HttpServlet {
 	private static final String OP_IR_FORMULARIO = "2";
 	private static final String OP_DAR_DE_BAJA = "3";
 	private static final String OP_LISTADO_BAJA = "4";
+	private static final String OP_DESANULAR = "5";
 
 	private MultaDAO daoMulta = null;
 
@@ -75,6 +76,9 @@ public class MultaController extends HttpServlet {
 			case OP_LISTADO_BAJA:
 				listadoBaja(request);
 				break;
+			case OP_DESANULAR:
+				desAnular(request);
+				break;
 			default:
 				listar(request);
 				break;
@@ -88,6 +92,27 @@ public class MultaController extends HttpServlet {
 			request.getRequestDispatcher(vista).forward(request, response);
 		}
 
+	}
+
+	private void desAnular(HttpServletRequest request) {
+		try {
+			daoMulta.desAnularMulta(id);
+			//listar(request);
+			alerta.setTipo(Mensaje.TIPO_SUCCESS);
+			alerta.setTexto("Se ha des-anulado la multa correctamente. ");
+			request.setAttribute("mensaje", alerta);
+			vista = "listado";
+			//recupero la multa que se ha des-anulado para mostrarla en el log
+			Multa mDesAnulada= daoMulta.getById(id);
+			LOG.info("Se ha des-anulado la multa :"+ mDesAnulada.toString());
+			
+		} catch (SQLException e) {
+			LOG.error(e);
+			alerta.setTipo(Mensaje.TIPO_DANGER);
+			alerta.setTexto("No ha sido posible des-anular la multa. ");
+			request.setAttribute("mensaje", alerta);
+		}
+		
 	}
 
 	/**
