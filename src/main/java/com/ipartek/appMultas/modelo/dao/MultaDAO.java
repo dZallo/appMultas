@@ -4,6 +4,8 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLType;
+import java.sql.Types;
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
@@ -18,7 +20,7 @@ public class MultaDAO {
 
 	private final static String SQL_GETBYID = "{call multa_getById(?)}";
 
-	private final static String SQL_INSERT = "{multa_insert(?,?,?,?,?)}";
+	private final static String SQL_INSERT = "{call multa_insert(?,?,?,?,?)}";
 	private final static String SQL_UPDATE_FECHA_BAJA = "{call multa_updateFechaBaja(?)}";
 
 	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
@@ -113,7 +115,7 @@ public class MultaDAO {
 			cs.setLong(4, id_agente);
 			
 			//parametros de salida
-			cs.registerOutParameter(5, 3);
+			cs.registerOutParameter(5, Types.INTEGER);
 
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
