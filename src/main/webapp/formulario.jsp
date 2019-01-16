@@ -20,7 +20,9 @@
   	</div>
   	<div class="form-group">
 	    <label for="concepto">Concepto: </label>
-	    <textarea class="form-control" id="concepto" name="concepto" aria-describedby="importeHelp" placeholder="Motivo de la sanción" required>${concepto}</textarea>
+	    <textarea class="form-control" id="concepto" name="concepto" aria-describedby="importeHelp" 
+	    		  placeholder="Motivo de la sanción" onKeyDown="contadorFuncion()" onKeyUp="contadorFuncion()" required>${concepto}</textarea>
+  		<p><b id="textoContador" name="textoContador">0</b> /255</p>
   	</div>
   	<div class="form-group">
 	    <input type="hidden" id="id_coche" name="id_coche" value="${coche.id }">
@@ -28,5 +30,27 @@
   	</div>
       <button type="submit" class="btn btn-lg btn-secondary btn-block">Crear</button>
   	</form>
+  	
+  	<script>
+	
+		function contadorFuncion()
+		{
+			mensaje = document.getElementById('concepto');
+			texto = mensaje.value;
+			document.getElementById('textoContador').innerHTML = texto.length;
+			if(texto.length <= 240) {
+				document.getElementById('textoContador').style.color="green";
+			}
+			if(texto.length > 240){
+				document.getElementById('textoContador').style.color="orange";
+			}
+			if(texto.length >= 254){
+				document.getElementById('textoContador').style.color="red";
+				nuevotexto = texto.slice(0, 254);
+				mensaje.value= nuevotexto;
+			}
+		}
+	
+</script>
     
 <%@include file="includes/pie.jsp" %>
