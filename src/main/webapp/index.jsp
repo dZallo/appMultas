@@ -17,5 +17,8 @@
     <p class="lead">
       <a href="listado" class="btn btn-lg btn-secondary btn-block">Ver Multas</a>
     </p>
+    <p>
+      <a href="multa?op=4" class="btn btn-lg btn-secondary btn-block">Ver Multas Anuladas</a>
+    </p>
 <%@include file="includes/mensajes.jsp" %>
 <%@include file="includes/pie.jsp" %>
