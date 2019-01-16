@@ -22,6 +22,23 @@ Debemos seguir los siguientes pasos:
 ## Esquema Entidad-Relación de la Base de Datos DGT
 ![Alt Esquema del E-R de la BD](https://github.com/dZallo/appMultas/blob/master/screnshoots/e-r_DGT.png)
 
+## TESTING
+### Usuarios registrados
+| Nº Placa | Password | Nombre_Agente |
+|----------|----------|---------------|
+| 1234     | 12345678 | Majonei       |
+| 4321     | 12345678 | Jonny Walker  |
+| 7890     | 12345678 | Monk          |
+| 0987     | 12345678 | Takelberry    |
+| 5678     | 12345678 | Tontini       |
+
+### Vehículos registrados
+| ID | Matrícula | Modelo        |
+|----|-----------|---------------|
+| 1  | 3548MKZ   | toyota yaris  |
+| 3  | 9605EFH   | Fiat Multipla |
+| 4  | 5674MBD   | GRT           |
+| 6  | BI0020AZ  | flagoneta     |
 
 ## Pantallas principales de la aplicación
 
