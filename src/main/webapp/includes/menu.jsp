@@ -4,7 +4,7 @@
 			<div class="inner">
 				<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
 					<h1 class="masthead-brand">
-						<a href="index"><img src="img/fee64.png"></a><small>${sessionScope.agenteLogueado.nombre}</small>
+						<a href="../index.jsp"><img src="../img/fee64.png"></a><small>${sessionScope.agenteLogueado.nombre}</small>
 					</h1>
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbarCollapse" aria-controls="navbarCollapse"
@@ -19,6 +19,8 @@
 									Multas</a></li>
 							<li class="nav-item"><a class="btn btn-secondary btn-block m-2" href="multa?op=4">Ver
 									Multas Anuladas</a></li>
+							<li class="nav-item"><a class="btn btn-danger btn-block m-2" href="${pageContext.request.contextPath}/logout">Cerrar
+									sesión</a></li>
 						</ul>
 					</div>
 				</nav>
