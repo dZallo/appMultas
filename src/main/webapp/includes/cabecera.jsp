@@ -12,7 +12,7 @@
     <title>Aplicación Multas</title>
 
 	<!-- Favicon -->
-	<link rel="icon" type="image/png" href="img/fee.png">
+	<link rel="icon" type="image/png" href="${pageContext.request.contextPath}/img/fee.png">
 
 	<!-- Bootstrap core CSS -->
     <link rel="stylesheet"
