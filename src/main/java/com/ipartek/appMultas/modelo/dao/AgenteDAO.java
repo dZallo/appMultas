@@ -12,6 +12,7 @@ import com.ipartek.appMultas.modelo.pojo.Agente;
 public class AgenteDAO {
 
 	private final static String SQL_GETBYID = "{call agente_getById(?)}";
+	private final static String SQL_LOGIN = "{call agente_login(?,?)}";
 
 	private final static Logger LOG = Logger.getLogger(AgenteDAO.class);
 	private static AgenteDAO INSTANCE = null;
@@ -27,6 +28,26 @@ public class AgenteDAO {
 			INSTANCE = new AgenteDAO();
 		}
 		return INSTANCE;
+	}
+	
+	public Agente login(String placa, String password) {
+		Agente a = null;
+
+		String sql = SQL_LOGIN;
+		try (Connection conn = ConnectionManager.getConnection();
+			CallableStatement cs = conn.prepareCall(sql);
+			){
+			cs.setString(1, placa);
+			cs.setString(2, password);
+			try (ResultSet rs = cs.executeQuery();) {
+				while (rs.next()) {
+					a = rowMapper(rs);
+				}
+			}
+		} catch (Exception e) {
+			LOG.debug(e);
+		}
+		return a;
 	}
 
 	/**

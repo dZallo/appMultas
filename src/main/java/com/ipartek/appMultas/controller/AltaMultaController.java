@@ -27,7 +27,7 @@ import com.ipartek.appMultas.modelo.pojo.Multa;
 /**
  * Servlet implementation class AltaMultaController
  */
-@WebServlet("/altamulta")
+@WebServlet("/privado/altamulta")
 public class AltaMultaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final static Logger LOG = Logger.getLogger(AltaMultaController.class);
@@ -116,7 +116,7 @@ public class AltaMultaController extends HttpServlet {
 				// Crear mensaje
 				request.setAttribute("mensaje", new Mensaje(Mensaje.TIPO_SUCCESS, "Multa registrada correctamente."));
 				// Volver a index
-				request.getRequestDispatcher("index").forward(request, response);
+				request.getRequestDispatcher("listado").forward(request, response);
 			}
 		} catch (NumberFormatException e) {
 			// Importe no es numérico

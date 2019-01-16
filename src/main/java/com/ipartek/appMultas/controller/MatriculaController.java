@@ -19,7 +19,7 @@ import com.ipartek.appMultas.modelo.pojo.Mensaje;
  * Servlet implementation class MatriculaController PARA COMPROBAR QUE LA
  * MATRÍCULA EXISTE
  */
-@WebServlet("/matricula")
+@WebServlet("/privado/matricula")
 public class MatriculaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final static Logger LOG = Logger.getLogger(MatriculaController.class);

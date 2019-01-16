@@ -20,7 +20,7 @@ import com.ipartek.appMultas.modelo.pojo.Multa;
 /**
  * Servlet implementation class MultaController
  */
-@WebServlet("/multa")
+@WebServlet("/privado/multa")
 public class MultaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

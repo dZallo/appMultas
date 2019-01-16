@@ -13,7 +13,7 @@ import com.ipartek.appMultas.modelo.pojo.Coche;
 /**
  * Servlet implementation class MultarController PARA DAR DE ALTA LA MULTA
  */
-@WebServlet("/multar")
+@WebServlet("/privado/multar")
 public class MultarController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -22,7 +22,7 @@ import com.ipartek.appMultas.modelo.pojo.Multa;
  * Servlet implementation class ListadoController PARA OBTENER Y LISTAR TODAS
  * LAS MULTAS
  */
-@WebServlet("/listado")
+@WebServlet("/privado/listado")
 public class ListadoController extends HttpServlet {
 	private final static Logger LOG = Logger.getLogger(ListadoController.class);
 	private static final long serialVersionUID = 1L;
