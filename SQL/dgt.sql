@@ -118,7 +118,7 @@ CREATE TABLE `multa` (
   KEY `fk_multas_agentes_idx` (`id_agente`),
   CONSTRAINT `fk_multas_agentes` FOREIGN KEY (`id_agente`) REFERENCES `agente` (`id`),
   CONSTRAINT `fk_multas_coches` FOREIGN KEY (`id_coche`) REFERENCES `coche` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +127,7 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (2,6,1,500,'exceso velocidad 240km/h','2019-01-07 10:38:46','2019-01-07 10:38:46',NULL),(5,1,1,1400,'por ir a200k/h en zona de 30km/h','2019-01-07 12:40:21','2019-01-07 12:40:21',NULL),(7,1,1,500,'Pasar semáforo en rojo','2019-01-09 13:25:34','2019-01-14 12:49:19','2019-01-14 12:49:19'),(9,6,1,1000,'Aparcar donde no debe','2019-01-09 13:29:00','2019-01-09 13:29:00',NULL),(17,1,1,500,'Ha excedido el límite de velocidad, 20km/h','2019-01-10 12:12:51','2019-01-10 12:12:51',NULL),(22,6,1,50,'Iba 20km/h por encima en una zona de 120','2019-01-14 12:51:03','2019-01-14 12:59:34','2019-01-14 12:59:34'),(24,6,1,200,'Se ha saltado un semaforo en rojo','2019-01-14 13:09:16','2019-01-14 13:09:16',NULL),(28,1,1,222,'Se ha saltado un Stop\r\n','2019-01-15 10:55:27','2019-01-15 10:58:25','2019-01-15 10:58:25'),(29,1,1,2000,'Stop y semaforo en rojo','2019-01-15 11:36:51','2019-01-15 11:36:57','2019-01-15 11:36:57'),(30,1,1,250,'Por aparcar en zona de carga-descarga','2019-01-16 09:21:31','2019-01-16 09:23:24','2019-01-16 09:23:24'),(31,4,2,100,'Se ha saltado un semaforo en rojo','2019-01-16 12:07:30','2019-01-16 12:07:30',NULL),(32,1,2,100,'Se ha saltado un semaforo en rojo','2019-01-16 12:14:42','2019-01-16 12:14:42',NULL),(33,3,2,50,'Ha excedido el límite de velocidad 18Km/h por encima del límite','2019-01-16 12:14:42','2019-01-16 12:14:42',NULL),(34,4,3,100,'Se ha saltado un semaforo en rojo','2019-01-16 12:16:30','2019-01-16 12:16:30',NULL),(35,3,3,150,'Ha excedido el límite de velocidad 25Km/h por encima del límite','2019-01-16 12:16:30','2019-01-16 12:16:30',NULL),(36,3,3,25,'No ha cedido el paso a los peatones en ningun paso de cebra','2019-01-16 12:16:30','2019-01-16 12:16:30',NULL),(37,4,4,74.95,'Se ha saltado un STOP','2019-01-16 12:33:21','2019-01-16 12:33:21',NULL),(38,4,4,500,'Ha doblado la tasa de alcoholemia permitida','2019-01-16 12:33:21','2019-01-16 12:33:21',NULL),(39,3,4,75,'El coche estaba circulando sin tener la ITV y/o un permiso especial','2019-01-16 12:33:21','2019-01-16 12:33:21',NULL),(40,4,5,74.95,'Se ha saltado un STOP','2019-01-16 12:41:07','2019-01-16 12:41:07',NULL),(41,6,5,200,'Ha superado la tasa de alcoholemia permitida por 0.2','2019-01-16 12:41:07','2019-01-16 12:41:07',NULL),(42,3,5,150,'El coche estaba circulando sin tener seguro','2019-01-16 12:41:07','2019-01-16 12:41:07',NULL),(43,1,1,50,'No ha marcado la trayectoria que iba a tomar con el intermitente','2019-01-16 13:06:37','2019-01-16 13:07:28','2019-01-16 13:07:28');
+INSERT INTO `multa` VALUES (2,6,1,500,'exceso velocidad 240km/h','2019-01-07 10:38:46','2019-01-07 10:38:46',NULL),(5,1,1,1400,'por ir a200k/h en zona de 30km/h','2019-01-07 12:40:21','2019-01-07 12:40:21',NULL),(7,1,1,500,'Pasar semáforo en rojo','2019-01-09 13:25:34','2019-01-14 12:49:19','2019-01-14 12:49:19'),(9,6,1,1000,'Aparcar donde no debe','2019-01-09 13:29:00','2019-01-09 13:29:00',NULL),(17,1,1,500,'Ha excedido el límite de velocidad, 20km/h','2019-01-10 12:12:51','2019-01-10 12:12:51',NULL),(22,6,1,50,'Iba 20km/h por encima en una zona de 120','2019-01-14 12:51:03','2019-01-14 12:59:34','2019-01-14 12:59:34'),(24,6,1,200,'Se ha saltado un semaforo en rojo','2019-01-14 13:09:16','2019-01-16 14:17:22',NULL),(28,1,1,222,'Se ha saltado un Stop\r\n','2019-01-15 10:55:27','2019-01-15 10:58:25','2019-01-15 10:58:25'),(29,1,1,2000,'Stop y semaforo en rojo','2019-01-15 11:36:51','2019-01-15 11:36:57','2019-01-15 11:36:57'),(30,1,1,250,'Por aparcar en zona de carga-descarga','2019-01-16 09:21:31','2019-01-16 09:23:24','2019-01-16 09:23:24'),(31,4,2,100,'Se ha saltado un semaforo en rojo','2019-01-16 12:07:30','2019-01-16 12:07:30',NULL),(32,1,2,100,'Se ha saltado un semaforo en rojo','2019-01-16 12:14:42','2019-01-16 13:32:41','2019-01-16 13:32:41'),(33,3,2,50,'Ha excedido el límite de velocidad 18Km/h por encima del límite','2019-01-16 12:14:42','2019-01-16 12:14:42',NULL),(34,4,3,100,'Se ha saltado un semaforo en rojo','2019-01-16 12:16:30','2019-01-16 12:16:30',NULL),(35,3,3,150,'Ha excedido el límite de velocidad 25Km/h por encima del límite','2019-01-16 12:16:30','2019-01-16 12:16:30',NULL),(36,3,3,25,'No ha cedido el paso a los peatones en ningun paso de cebra','2019-01-16 12:16:30','2019-01-16 12:16:30',NULL),(37,4,4,74.95,'Se ha saltado un STOP','2019-01-16 12:33:21','2019-01-16 12:33:21',NULL),(38,4,4,500,'Ha doblado la tasa de alcoholemia permitida','2019-01-16 12:33:21','2019-01-16 12:33:21',NULL),(39,3,4,75,'El coche estaba circulando sin tener la ITV y/o un permiso especial','2019-01-16 12:33:21','2019-01-16 12:33:21',NULL),(40,4,5,74.95,'Se ha saltado un STOP','2019-01-16 12:41:07','2019-01-16 12:41:07',NULL),(41,6,5,200,'Ha superado la tasa de alcoholemia permitida por 0.2','2019-01-16 12:41:07','2019-01-16 12:41:07',NULL),(42,3,5,150,'El coche estaba circulando sin tener seguro','2019-01-16 12:41:07','2019-01-16 12:41:07',NULL),(43,1,1,50,'No ha marcado la trayectoria que iba a tomar con el intermitente','2019-01-16 13:06:37','2019-01-16 13:07:28','2019-01-16 13:07:28'),(44,1,4,50,'Se ha saltado un semáforo poniendo en peligro a los demás usuarios','2019-01-16 13:58:48','2019-01-16 13:59:33',NULL),(45,4,1,200,'Ha dado positivo en el control de alcoholemia realizado','2019-01-16 14:08:16','2019-01-16 14:08:58','2019-01-16 14:08:58');
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,6 +204,25 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `coche_getByMatricula`(IN p_matriculaCoche VARCHAR(10))
 BEGIN
 	SELECT c.id, c.matricula, c.modelo, c.km FROM coche AS c WHERE c.matricula =p_matriculaCoche;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `multa_desAnular` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `multa_desAnular`(IN p_idMulta long)
+BEGIN
+	UPDATE multa SET fecha_baja= NULL, fecha_modificacion= CURRENT_TIMESTAMP() WHERE id = p_idMulta;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -349,4 +368,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-16 13:08:42
+-- Dump completed on 2019-01-16 14:25:01
