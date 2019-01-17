@@ -159,7 +159,7 @@ SET character_set_client = utf8mb4;
  1 AS `mes`,
  1 AS `anio`,
  1 AS `multasAsignadas`,
- 1 AS `totalMultasAnual`*/;
+ 1 AS `totalMultasMes`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -197,61 +197,6 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `agente_login`(IN p_numplaca VARCHAR(45), IN p_password VARCHAR(50))
 BEGIN
 	SELECT id, nombre, placa, id_departamento, `password` FROM agente WHERE placa = p_numplaca AND `password` = p_password;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `agente_totalMultasAnual` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `agente_totalMultasAnual`(IN p_idAgente LONG)
-BEGIN
-    SELECT
-		id_agente,
-        COUNT(*) AS multasAsignadas,
-        ROUND(SUM(importe),2) AS totalMultasAnual
-        FROM multa
-        WHERE  YEAR(fecha_alta)=YEAR(CURDATE()) AND
-        id_agente =p_idAgente AND
-        fecha_baja IS NULL
-        GROUP BY id_agente;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `agente_totalMultasMes` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `agente_totalMultasMes`(IN p_idAgente LONG)
-BEGIN
-    SELECT
-		id_agente,
-        COUNT(*) AS multasAsignadas,
-        ROUND(SUM(importe),2) AS totalMultasMensual
-        FROM multa
-        WHERE MONTH(fecha_alta)=MONTH(CURDATE()) AND
-        id_agente =p_idAgente AND
-        fecha_baja IS NULL
-        group by id_agente;
-        
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -425,6 +370,61 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `multa_totalMultasAnual` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `multa_totalMultasAnual`(IN p_idAgente LONG)
+BEGIN
+    SELECT
+		id_agente,
+        COUNT(*) AS multasAsignadas,
+        ROUND(SUM(importe),2) AS totalMultasAnual
+        FROM multa
+        WHERE  YEAR(fecha_alta)=YEAR(CURDATE()) AND
+        id_agente =p_idAgente AND
+        fecha_baja IS NULL
+        GROUP BY id_agente;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `multa_totalMultasMes` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `multa_totalMultasMes`(IN p_idAgente LONG)
+BEGIN
+    SELECT
+		id_agente,
+        COUNT(*) AS multasAsignadas,
+        ROUND(SUM(importe),2) AS totalMultasMensual
+        FROM multa
+        WHERE MONTH(fecha_alta)=MONTH(CURDATE()) AND
+        id_agente =p_idAgente AND
+        fecha_baja IS NULL
+        group by id_agente;
+        
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `multa_updateFechaBaja` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -476,7 +476,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `v_objetivos_mes` AS select `multa`.`id_agente` AS `id_agente`,month(`multa`.`fecha_alta`) AS `mes`,year(`multa`.`fecha_alta`) AS `anio`,count(0) AS `multasAsignadas`,round(sum(`multa`.`importe`),2) AS `totalMultasAnual` from `multa` where isnull(`multa`.`fecha_baja`) group by `multa`.`id_agente`,year(`multa`.`fecha_alta`),month(`multa`.`fecha_alta`) */;
+/*!50001 VIEW `v_objetivos_mes` AS select `multa`.`id_agente` AS `id_agente`,month(`multa`.`fecha_alta`) AS `mes`,year(`multa`.`fecha_alta`) AS `anio`,count(0) AS `multasAsignadas`,round(sum(`multa`.`importe`),2) AS `totalMultasMes` from `multa` where isnull(`multa`.`fecha_baja`) group by `multa`.`id_agente`,year(`multa`.`fecha_alta`),month(`multa`.`fecha_alta`) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -490,4 +490,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-17 10:22:59
+-- Dump completed on 2019-01-17 10:35:15
