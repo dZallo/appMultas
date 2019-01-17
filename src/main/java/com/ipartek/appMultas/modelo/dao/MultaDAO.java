@@ -2,6 +2,7 @@ package com.ipartek.appMultas.modelo.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -42,6 +43,69 @@ public class MultaDAO {
 		return INSTANCE;
 	}
 
+	/**
+	 * Obtiene la suma  total de los importes del año y el agente seleccionado
+	 * @param id_agente
+	 * @param anio
+	 * @return
+	 */
+	public Long getObjetivoAnual( Long id_agente, Long anio) {
+		
+		Long importeAnual=0L;
+		
+		String sql = SQL_OBJETIVOS_ANIO;
+		try(
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement pst =conn.prepareStatement(sql);
+			){
+			pst.setLong(1, id_agente);
+			pst.setLong(2, anio);
+			try(
+				ResultSet rs = pst.executeQuery();
+				){
+				while(rs.next()) {
+					importeAnual = rs.getLong("totalMultasAnual");
+				}
+			}
+			
+		}catch (Exception e) {
+			LOG.debug(e);
+		}
+		return importeAnual;
+	}
+	
+	/**
+	 *  Obtiene la suma  total de los importes del año, el mes y el agente seleccionado
+	 * @param id_agente
+	 * @param anio
+	 * @param mes
+	 * @return
+	 */
+	public Long getObjetivoMensual( Long id_agente, Long anio, Long mes) {
+		Long importeMensual=0L;
+		String sql = SQL_OBJETIVOS_MES;
+		try(
+				Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst =conn.prepareStatement(sql);
+				){
+				pst.setLong(1, id_agente);
+				pst.setLong(2, anio);
+				pst.setLong(3, mes);
+				try(
+						ResultSet rs = pst.executeQuery();
+						){
+						while(rs.next()) {
+							importeMensual = rs.getLong("totalMultasMes");
+						}
+					}
+					
+				}catch (Exception e) {
+					LOG.debug(e);
+				}
+		
+		return importeMensual;
+	}
+	
 	public Multa getById(Long idMulta) {
 		Multa m = new Multa();
 
