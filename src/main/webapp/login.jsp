@@ -15,7 +15,11 @@
 	    <input type="password" class="form-control" id="password" name="password" 
 	    	   aria-describedby="passwordHelp" placeholder="P.E: 12345678" value="${password}" required>
   	</div>
-  	<button type="submit" class="btn btn-lg btn-secondary btn-block">Acceder</button>
+  	<button type="submit" class="btn btn-lg btn-secondary btn-block mb-3">
+  		<span class="d-flex justify-content-center align-items-center">Acceder
+      		<i class="material-icons" style="font-size:26px; margin-left:3px;">input</i>
+      	</span>
+    </button>
   	</form>
 <%@include file="includes/mensajes.jsp" %>
 <%@include file="includes/pie.jsp" %>

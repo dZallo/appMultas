@@ -59,7 +59,8 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("agenteLogueado", agente);
 			session.setAttribute("mensaje", null);
 			// Redireccionar a index.jsp
-			request.getRequestDispatcher("privado/index.jsp").forward(request, response);
+			//request.getRequestDispatcher("privado/index.jsp").forward(request, response);
+			response.sendRedirect("privado/index.jsp");
 		}
 		}
 	}

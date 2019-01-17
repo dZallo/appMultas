@@ -24,7 +24,11 @@
 </table>
 
 <p class="lead">
-<a href="listado" class="btn btn-lg btn-info btn-block">Listado de multas</a>
+<a href="listado" class="btn btn-lg btn-info btn-block">
+<span class="d-flex justify-content-center align-items-center">Listado de Multas
+    	<i class="material-icons" style="font-size:26px; margin-left:3px;">subdirectory_arrow_left</i>
+	</span>
+</a>
 </p>
     
 <%@include file="../includes/pie.jsp" %>

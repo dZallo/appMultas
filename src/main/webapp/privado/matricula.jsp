@@ -10,7 +10,11 @@
     <input type="text" class="form-control" id="matriculaCoche" name="matriculaCoche" 
     	aria-describedby="matriculaHelp" placeholder="P.E: 1234AAA" value ="${matricula}" autofocus required>
   	</div>
-      <button type="submit" class="btn btn-lg btn-secondary btn-block">Buscar</button>
+      <button type="submit" class="btn btn-lg btn-secondary btn-block">
+      	<span class="d-flex justify-content-center align-items-center">Buscar
+    		<i class="material-icons" style="font-size:26px; margin-left:3px;">find_in_page</i>
+		</span>
+      </button>
   	</form>
     
 <%@include file="../includes/pie.jsp" %>

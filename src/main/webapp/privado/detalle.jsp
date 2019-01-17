@@ -31,7 +31,9 @@
 	   <p class="lead">
 	      	<!-- Button to Open the Modal -->
 			<button type="button" class="btn btn-lg btn-warning btn-block" data-toggle="modal" data-target="#myModal">
-			 Anular multa
+				<span class="d-flex justify-content-center align-items-center">Anular Multa
+    				<i class="material-icons" style="font-size:26px; margin-left:3px;">do_not_disturb_on</i>
+    			</span>
 			</button>
 		</p>
 	  </c:when>
@@ -39,7 +41,9 @@
 	    <p class="lead">
 	      	<!-- Button to Open the Modal -->
 			<button type="button" class="btn btn-lg btn-warning btn-block" data-toggle="modal" data-target="#myModal2">
-			 Des-Anular multa
+			 <span class="d-flex justify-content-center align-items-center">Des-Anular Multa
+    				<i class="material-icons" style="font-size:26px; margin-left:3px;">low_priority</i>
+    			</span>
 			</button>
 		</p>
 	  </c:otherwise>
@@ -64,8 +68,16 @@
 		
 		      <!-- Modal footer -->
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-	        	<a href="multa?op=3&id=${multa.id}" class="btn btn-success">Confirmar</a>	      
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">
+		        	<span class="d-flex justify-content-center align-items-center">Cancelar
+	    				<i class="material-icons" style="font-size:26px; margin-left:3px;">cancel</i>
+	    			</span>
+		        </button>
+	        	<a href="multa?op=3&id=${multa.id}" class="btn btn-success">
+		        	<span class="d-flex justify-content-center align-items-center">Confirmar
+	    				<i class="material-icons" style="font-size:26px; margin-left:3px;">check_circle</i>
+	    			</span>
+    			</a>	      
 		      </div>
 		    </div>
 		  </div>
@@ -90,8 +102,16 @@
 		
 		      <!-- Modal footer -->
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-	        	<a href="multa?op=5&id=${multa.id}" class="btn btn-success">Confirmar</a>	      
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">
+		        <span class="d-flex justify-content-center align-items-center">Cancelar
+	    				<i class="material-icons" style="font-size:26px; margin-left:3px;">cancel</i>
+	    		</span>
+		        </button>
+	        	<a href="multa?op=5&id=${multa.id}" class="btn btn-success">
+	        	<span class="d-flex justify-content-center align-items-center">Confirmar
+	    				<i class="material-icons" style="font-size:26px; margin-left:3px;">check_circle</i>
+	    		</span>
+    			</a>		      
 		      </div>
 		    </div>
 		  </div>
@@ -100,12 +120,20 @@
 		<c:choose>
     <c:when test="${multa.fecha_baja==null}">
         <p class="lead">
-	  	  <a href="listado" class="btn btn-lg btn-info btn-block">Volver al listado</a>
+	  	  <a href="listado" class="btn btn-lg btn-info btn-block">
+	  	  <span class="d-flex justify-content-center align-items-center">Volver al listado
+    			<i class="material-icons" style="font-size:26px; margin-left:3px;">subdirectory_arrow_left</i>
+    		</span>
+    	</a>
 	  	</p> 
     </c:when>    
     <c:otherwise>
         <p class="lead">
-	  	  <a href="multa?op=4" class="btn btn-lg btn-info btn-block">Volver al listado</a>
+	  	  <a href="multa?op=4" class="btn btn-lg btn-info btn-block">
+	  	  <span class="d-flex justify-content-center align-items-center">Volver al listado
+    			<i class="material-icons" style="font-size:26px; margin-left:3px;">subdirectory_arrow_left</i>
+    		</span>
+    	</a>
 	  	</p>
     </c:otherwise>
 </c:choose>

@@ -23,7 +23,11 @@
   </tbody>
 </table>
 <p class="lead">
-<a href="multa?op=4" class="btn btn-lg btn-warning btn-block">Listado de Bajas</a>
+<a href="multa?op=4" class="btn btn-lg btn-warning btn-block">
+	<span class="d-flex justify-content-center align-items-center">Listado de Bajas
+    	<i class="material-icons" style="font-size:26px; margin-left:3px;">subdirectory_arrow_left</i>
+	</span>
+</a>
 </p>
     
 <%@include file="../includes/pie.jsp" %>
