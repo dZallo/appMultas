@@ -8,6 +8,8 @@ public class Agente {
 	private String placa;
 	private Long id_departamento;
 	private HashMap<Long, Multa> multas;
+	private Double importeAnual;
+	private Double importeMensual;
 
 	public Agente() {
 		super();
@@ -60,6 +62,23 @@ public class Agente {
 
 	public void setMultas(HashMap<Long, Multa> multas) {
 		this.multas = multas;
+	}
+	
+
+	public Double getImporteAnual() {
+		return importeAnual;
+	}
+
+	public void setImporteAnual(Double importeAnual) {
+		this.importeAnual = importeAnual;
+	}
+
+	public Double getImporteMensual() {
+		return importeMensual;
+	}
+
+	public void setImporteMensual(Double importeMensual) {
+		this.importeMensual = importeMensual;
 	}
 
 	@Override
@@ -114,7 +133,9 @@ public class Agente {
 	@Override
 	public String toString() {
 		return "Agente [id=" + id + ", nombre=" + nombre + ", placa=" + placa + ", id_departamento=" + id_departamento
-				+ ", multas=" + multas + "]";
+				+ ", multas=" + multas + ", importeAnual=" + importeAnual + ", importeMensual=" + importeMensual + "]";
 	}
+
+
 
 }
