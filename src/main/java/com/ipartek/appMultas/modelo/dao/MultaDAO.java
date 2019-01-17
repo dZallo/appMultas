@@ -24,7 +24,7 @@ public class MultaDAO {
 	private final static String SQL_UPDATE_FECHA_BAJA = "{call multa_updateFechaBaja(?)}";
 	private final static String SQL_DESANULAR = "{call multa_desAnular(?)}";
 	private final static String SQL_OBJETIVOS_ANIO="SELECT id_agente,anio,multasAsignadas,totalMultasAnual FROM v_objetivos_anio WHERE id_agente=? AND anio=?;";
-	private final static String SQL_OBJETIVOS_MES="SELECT id_agente,mes,anio,multasAsignadas,totalMultasMes FROM dgt.v_objetivos_mes WHERE id_agente=? AND mes=? AND anio=?";
+	private final static String SQL_OBJETIVOS_MES="SELECT id_agente,mes,anio,multasAsignadas,totalMultasMes FROM v_objetivos_mes WHERE id_agente=? AND mes=? AND anio=?;";
 	
 
 	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
@@ -49,9 +49,9 @@ public class MultaDAO {
 	 * @param anio
 	 * @return
 	 */
-	public Long getObjetivoAnual( Long id_agente, Long anio) {
+	public Double getObjetivoAnual( Long id_agente, Long anio) {
 		
-		Long importeAnual=0L;
+		Double importeAnual=0.0;
 		
 		String sql = SQL_OBJETIVOS_ANIO;
 		try(
@@ -64,7 +64,7 @@ public class MultaDAO {
 				ResultSet rs = pst.executeQuery();
 				){
 				while(rs.next()) {
-					importeAnual = rs.getLong("totalMultasAnual");
+					importeAnual = rs.getDouble("totalMultasAnual");
 				}
 			}
 			
@@ -81,21 +81,21 @@ public class MultaDAO {
 	 * @param mes
 	 * @return
 	 */
-	public Long getObjetivoMensual( Long id_agente, Long anio, Long mes) {
-		Long importeMensual=0L;
+	public Double getObjetivoMensual( Long id_agente, Long anio, Long mes) {
+		Double importeMensual=0.0;
 		String sql = SQL_OBJETIVOS_MES;
 		try(
 				Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst =conn.prepareStatement(sql);
 				){
 				pst.setLong(1, id_agente);
-				pst.setLong(2, anio);
-				pst.setLong(3, mes);
+				pst.setLong(2, mes);
+				pst.setLong(3, anio);
 				try(
 						ResultSet rs = pst.executeQuery();
 						){
 						while(rs.next()) {
-							importeMensual = rs.getLong("totalMultasMes");
+							importeMensual = rs.getDouble("totalMultasMes");
 						}
 					}
 					

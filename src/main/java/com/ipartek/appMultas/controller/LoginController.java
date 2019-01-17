@@ -1,6 +1,7 @@
 package com.ipartek.appMultas.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
 
 import com.ipartek.appMultas.modelo.dao.AgenteDAO;
 import com.ipartek.appMultas.modelo.dao.MultaDAO;
@@ -23,6 +26,8 @@ public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private AgenteDAO daoAgente;
 	private MultaDAO daoMulta;
+	
+	private final static Logger LOG = Logger.getLogger(LoginController.class);
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -60,8 +65,8 @@ public class LoginController extends HttpServlet {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}else {
 			
-			agente.setImporteAnual(daoMulta.getObjetivoAnual(agente.getId(), (long)2019));
-			agente.setImporteMensual(daoMulta.getObjetivoMensual(agente.getId(), (long)2019, (long)1));
+			agente.setImporteAnual(daoMulta.getObjetivoAnual(agente.getId(), (long)obtenerAño()));
+			agente.setImporteMensual(daoMulta.getObjetivoMensual(agente.getId(), (long)obtenerAño(), (long)obtenerMes()));
 			HttpSession session = request.getSession();
 			session.setAttribute("agenteLogueado", agente);
 			session.setAttribute("mensaje", null);
@@ -70,6 +75,20 @@ public class LoginController extends HttpServlet {
 			response.sendRedirect("privado/index.jsp");
 		}
 		}
+	}
+	
+	private int obtenerAño() {
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		LOG.debug("Año actual para la búsqueda de estadísticas: " + year);
+		return year;
+	}
+	
+	private int obtenerMes() {
+		Calendar cal = Calendar.getInstance();
+		int month = cal.get(Calendar.MONTH);
+		LOG.debug("Mes actual para la búsqueda de estadísticas: " + month + 1);
+		return month + 1;
 	}
 
 }

@@ -8,8 +8,8 @@ public class Agente {
 	private String placa;
 	private Long id_departamento;
 	private HashMap<Long, Multa> multas;
-	private Long importeAnual;
-	private Long importeMensual;
+	private Double importeAnual;
+	private Double importeMensual;
 
 	public Agente() {
 		super();
@@ -65,19 +65,19 @@ public class Agente {
 	}
 	
 
-	public Long getImporteAnual() {
+	public Double getImporteAnual() {
 		return importeAnual;
 	}
 
-	public void setImporteAnual(Long importeAnual) {
+	public void setImporteAnual(Double importeAnual) {
 		this.importeAnual = importeAnual;
 	}
 
-	public Long getImporteMensual() {
+	public Double getImporteMensual() {
 		return importeMensual;
 	}
 
-	public void setImporteMensual(Long importeMensual) {
+	public void setImporteMensual(Double importeMensual) {
 		this.importeMensual = importeMensual;
 	}
 
