@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `dgt` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `dgt`;
 -- MySQL dump 10.13  Distrib 8.0.13, for Win64 (x86_64)
 --
--- Host: localhost    Database: dgt
+-- Host: 127.0.0.1    Database: dgt
 -- ------------------------------------------------------
 -- Server version	8.0.12
 
@@ -127,9 +127,28 @@ CREATE TABLE `multa` (
 
 LOCK TABLES `multa` WRITE;
 /*!40000 ALTER TABLE `multa` DISABLE KEYS */;
-INSERT INTO `multa` VALUES (2,6,1,500,'exceso velocidad 240km/h','2018-01-07 10:38:46','2018-01-07 10:38:46',NULL),(5,1,1,1400,'por ir a200k/h en zona de 30km/h','2019-01-07 12:40:21','2019-01-07 12:40:21',NULL),(7,1,1,500,'Pasar semáforo en rojo','2019-01-09 13:25:34','2019-01-14 12:49:19','2019-01-14 12:49:19'),(9,6,1,1000,'Aparcar donde no debe','2019-01-09 13:29:00','2019-01-09 13:29:00',NULL),(17,1,1,500,'Ha excedido el límite de velocidad, 20km/h','2019-01-10 12:12:51','2019-01-10 12:12:51',NULL),(22,6,1,50,'Iba 20km/h por encima en una zona de 120','2019-01-14 12:51:03','2019-01-14 12:59:34','2019-01-14 12:59:34'),(24,6,1,200,'Se ha saltado un semaforo en rojo','2019-01-14 13:09:16','2019-01-16 14:17:22',NULL),(28,1,1,222,'Se ha saltado un Stop\r\n','2019-01-15 10:55:27','2019-01-15 10:58:25','2019-01-15 10:58:25'),(29,1,1,2000,'Stop y semaforo en rojo','2019-01-15 11:36:51','2019-01-15 11:36:57','2019-01-15 11:36:57'),(30,1,1,250,'Por aparcar en zona de carga-descarga','2019-01-16 09:21:31','2019-01-16 09:23:24','2019-01-16 09:23:24'),(31,4,2,100,'Se ha saltado un semaforo en rojo','2018-01-16 12:07:30','2018-01-16 12:07:30',NULL),(32,1,2,100,'Se ha saltado un semaforo en rojo','2019-01-16 12:14:42','2019-01-16 13:32:41','2019-01-16 13:32:41'),(33,3,2,50,'Ha excedido el límite de velocidad 18Km/h por encima del límite','2019-01-16 12:14:42','2019-01-16 12:14:42',NULL),(34,4,3,100,'Se ha saltado un semaforo en rojo','2019-01-16 12:16:30','2019-01-16 12:16:30',NULL),(35,3,3,150,'Ha excedido el límite de velocidad 25Km/h por encima del límite','2019-01-16 12:16:30','2019-01-16 12:16:30',NULL),(36,3,3,25,'No ha cedido el paso a los peatones en ningun paso de cebra','2019-01-16 12:16:30','2019-01-16 12:16:30',NULL),(37,4,4,74.95,'Se ha saltado un STOP','2019-01-16 12:33:21','2019-01-16 12:33:21',NULL),(38,4,4,500,'Ha doblado la tasa de alcoholemia permitida','2019-01-16 12:33:21','2019-01-16 12:33:21',NULL),(39,3,4,75,'El coche estaba circulando sin tener la ITV y/o un permiso especial','2019-01-16 12:33:21','2019-01-16 12:33:21',NULL),(40,4,5,74.95,'Se ha saltado un STOP','2019-01-16 12:41:07','2019-01-16 12:41:07',NULL),(41,6,5,200,'Ha superado la tasa de alcoholemia permitida por 0.2','2019-01-16 12:41:07','2019-01-16 12:41:07',NULL),(42,3,5,150,'El coche estaba circulando sin tener seguro','2019-01-16 12:41:07','2019-01-16 12:41:07',NULL),(43,1,1,50,'No ha marcado la trayectoria que iba a tomar con el intermitente','2019-01-16 13:06:37','2019-01-16 13:07:28','2019-01-16 13:07:28'),(44,1,4,50,'Se ha saltado un semáforo poniendo en peligro a los demás usuarios','2019-01-16 13:58:48','2019-01-16 13:59:33',NULL),(45,4,1,200,'Ha dado positivo en el control de alcoholemia realizado','2019-01-16 14:08:16','2019-01-16 14:08:58','2019-01-16 14:08:58'),(46,4,2,300,'Te has saltado el último STOP','2018-01-16 14:08:16','2018-01-16 14:08:16',NULL);
+INSERT INTO `multa` VALUES (2,6,1,500,'exceso velocidad 240km/h','2018-01-07 10:38:46','2018-01-07 10:38:46',NULL),(5,1,1,1400,'por ir a200k/h en zona de 30km/h','2019-01-07 12:40:21','2019-01-07 12:40:21',NULL),(7,1,1,500,'Pasar semáforo en rojo','2019-01-09 13:25:34','2019-01-14 12:49:19','2019-01-14 12:49:19'),(9,6,1,1000,'Aparcar donde no debe','2019-01-09 13:29:00','2019-01-09 13:29:00',NULL),(17,1,1,500,'Ha excedido el límite de velocidad, 20km/h','2019-01-10 12:12:51','2019-01-10 12:12:51',NULL),(22,6,1,50,'Iba 20km/h por encima en una zona de 120','2019-01-14 12:51:03','2019-01-14 12:59:34','2019-01-14 12:59:34'),(24,6,1,200,'Se ha saltado un semaforo en rojo','2019-01-14 13:09:16','2019-01-16 14:17:22',NULL),(28,1,1,222,'Se ha saltado un Stop\r\n','2019-01-15 10:55:27','2019-01-15 10:58:25','2019-01-15 10:58:25'),(29,1,1,2000,'Stop y semaforo en rojo','2019-01-15 11:36:51','2019-01-15 11:36:57','2019-01-15 11:36:57'),(30,1,1,250,'Por aparcar en zona de carga-descarga','2019-01-16 09:21:31','2019-01-16 09:23:24','2019-01-16 09:23:24'),(31,4,2,100,'Se ha saltado un semaforo en rojo','2018-01-16 12:07:30','2018-01-16 12:07:30',NULL),(32,1,2,100,'Se ha saltado un semaforo en rojo','2019-01-16 12:14:42','2019-01-16 13:32:41','2019-01-16 13:32:41'),(33,3,2,50,'Ha excedido el límite de velocidad 18Km/h por encima del límite','2019-01-16 12:14:42','2019-01-16 12:14:42',NULL),(34,4,3,100,'Se ha saltado un semaforo en rojo','2019-01-16 12:16:30','2019-01-16 12:16:30',NULL),(35,3,3,150,'Ha excedido el límite de velocidad 25Km/h por encima del límite','2019-01-16 12:16:30','2019-01-16 12:16:30',NULL),(36,3,3,25,'No ha cedido el paso a los peatones en ningun paso de cebra','2019-01-16 12:16:30','2019-01-16 12:16:30',NULL),(37,4,4,74.95,'Se ha saltado un STOP','2019-01-16 12:33:21','2019-01-16 12:33:21',NULL),(38,4,4,530,'Ha doblado la tasa de alcoholemia permitida','2019-01-16 12:33:21','2019-01-16 12:33:21',NULL),(39,3,4,75,'El coche estaba circulando sin tener la ITV y/o un permiso especial','2019-01-16 12:33:21','2019-01-16 12:33:21',NULL),(40,4,5,74.95,'Se ha saltado un STOP','2019-01-16 12:41:07','2019-01-16 12:41:07',NULL),(41,6,5,200,'Ha superado la tasa de alcoholemia permitida por 0.2','2019-01-16 12:41:07','2019-01-16 12:41:07',NULL),(42,3,5,150,'El coche estaba circulando sin tener seguro','2019-01-16 12:41:07','2019-01-16 12:41:07',NULL),(43,1,1,50,'No ha marcado la trayectoria que iba a tomar con el intermitente','2019-01-16 13:06:37','2019-01-16 13:07:28','2019-01-16 13:07:28'),(44,1,4,50,'Se ha saltado un semáforo poniendo en peligro a los demás usuarios','2019-01-16 13:58:48','2019-01-16 13:59:33',NULL),(45,4,1,200,'Ha dado positivo en el control de alcoholemia realizado','2019-01-16 14:08:16','2019-01-16 14:08:58','2019-01-16 14:08:58'),(46,4,2,300,'Te has saltado el último STOP','2018-01-16 14:08:16','2018-01-16 14:08:16',NULL);
 /*!40000 ALTER TABLE `multa` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `v_objetivos`
+--
+
+DROP TABLE IF EXISTS `v_objetivos`;
+/*!50001 DROP VIEW IF EXISTS `v_objetivos`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8mb4;
+/*!50001 CREATE VIEW `v_objetivos` AS SELECT 
+ 1 AS `id`,
+ 1 AS `id_coche`,
+ 1 AS `id_agente`,
+ 1 AS `importe`,
+ 1 AS `concepto`,
+ 1 AS `fecha_alta`,
+ 1 AS `fecha_modificacion`,
+ 1 AS `fecha_baja`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `v_objetivos_anio`
@@ -446,6 +465,24 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
+-- Final view structure for view `v_objetivos`
+--
+
+/*!50001 DROP VIEW IF EXISTS `v_objetivos`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_objetivos` AS select `multa`.`id` AS `id`,`multa`.`id_coche` AS `id_coche`,`multa`.`id_agente` AS `id_agente`,`multa`.`importe` AS `importe`,`multa`.`concepto` AS `concepto`,`multa`.`fecha_alta` AS `fecha_alta`,`multa`.`fecha_modificacion` AS `fecha_modificacion`,`multa`.`fecha_baja` AS `fecha_baja` from `multa` group by `multa`.`id_agente` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `v_objetivos_anio`
 --
 
@@ -490,4 +527,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-17 10:35:15
+-- Dump completed on 2019-01-17 12:36:26
