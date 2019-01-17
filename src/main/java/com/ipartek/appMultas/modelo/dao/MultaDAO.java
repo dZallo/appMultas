@@ -22,6 +22,9 @@ public class MultaDAO {
 	private final static String SQL_INSERT = "{call multa_insert(?,?,?,?,?)}";
 	private final static String SQL_UPDATE_FECHA_BAJA = "{call multa_updateFechaBaja(?)}";
 	private final static String SQL_DESANULAR = "{call multa_desAnular(?)}";
+	private final static String SQL_OBJETIVOS_ANIO="SELECT id_agente,anio,multasAsignadas,totalMultasAnual FROM v_objetivos_anio WHERE id_agente=? AND anio=?;";
+	private final static String SQL_OBJETIVOS_MES="SELECT id_agente,mes,anio,multasAsignadas,totalMultasMes FROM dgt.v_objetivos_mes WHERE id_agente=? AND mes=? AND anio=?";
+	
 
 	private final static Logger LOG = Logger.getLogger(MultaDAO.class);
 	private static MultaDAO INSTANCE = null;
