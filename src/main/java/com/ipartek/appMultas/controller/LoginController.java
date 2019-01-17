@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ipartek.appMultas.modelo.dao.AgenteDAO;
+import com.ipartek.appMultas.modelo.dao.MultaDAO;
 import com.ipartek.appMultas.modelo.pojo.Agente;
 import com.ipartek.appMultas.modelo.pojo.Mensaje;
 
@@ -20,12 +21,15 @@ import com.ipartek.appMultas.modelo.pojo.Mensaje;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private AgenteDAO dao;
+	private AgenteDAO daoAgente;
+	private MultaDAO daoMulta;
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		dao = AgenteDAO.getInstance();
+		daoAgente = AgenteDAO.getInstance();
+		daoMulta = MultaDAO.getInstance();
+		
 	}
 
 	/**
@@ -41,7 +45,7 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String placa = request.getParameter("placa");
 		String password = request.getParameter("password");
-		Agente agente = dao.login(placa, password);
+		Agente agente = daoAgente.login(placa, password);
 		
 		if (placa.equals("") || password.equals("")) {
 			request.setAttribute("placa", placa);
@@ -55,6 +59,9 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("password", password);
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}else {
+			
+			agente.setImporteAnual(daoMulta.getObjetivoAnual(agente.getId(), (long)2019));
+			agente.setImporteMensual(daoMulta.getObjetivoMensual(agente.getId(), (long)2019, (long)1));
 			HttpSession session = request.getSession();
 			session.setAttribute("agenteLogueado", agente);
 			session.setAttribute("mensaje", null);
