@@ -17,6 +17,7 @@ import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.appMultas.modelo.dao.AgenteDAO;
 import com.ipartek.appMultas.modelo.dao.CocheDAO;
 import com.ipartek.appMultas.modelo.dao.MultaDAO;
 import com.ipartek.appMultas.modelo.pojo.Agente;
@@ -39,12 +40,18 @@ public class AltaMultaController extends HttpServlet {
 	private Long idAgente;
 	private String concepto = "";
 	private Coche c;
+	
+	private Agente agente = null;
+	private HttpSession session = null;
+	
+	private AgenteDAO daoAgente = null;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		daoCoche = CocheDAO.getInstance();
 		daoMulta = MultaDAO.getInstance();
+		daoAgente = AgenteDAO.getInstance();
 
 		// Crear Factoria y Validador
 		factory = Validation.buildDefaultValidatorFactory();
@@ -107,11 +114,12 @@ public class AltaMultaController extends HttpServlet {
 			} else {
 				// Correcto: Insert en la DB
 				daoMulta.insert(m, idAgente);
+
+				session = getSession(request);
+				agente = getAgenteSession(session);
+				session.setAttribute("agenteLogueado", daoAgente.obtenerImportes(agente));
 				
-				HttpSession session = request.getSession();
-				Agente agenteSesion= (Agente) session.getAttribute("agenteLogueado");
-				
-				LOG.info("Multa creada :" + m.toString() + ". Por el agente: " + agenteSesion.toString());
+				LOG.info("Multa creada :" + m.toString() + ". Por el agente: " + agente.toString());
 				
 				// Crear mensaje
 				request.setAttribute("mensaje", new Mensaje(Mensaje.TIPO_SUCCESS, "Multa registrada correctamente."));
@@ -156,6 +164,18 @@ public class AltaMultaController extends HttpServlet {
 		c = daoCoche.getBYId(idCoche);
 		idAgente = Long.parseLong(request.getParameter("id_agente"));
 	}
+	
+	private Agente getAgenteSession( HttpSession session) {
+		agente= (Agente) session.getAttribute("agenteLogueado");
+		
+		return agente;
+	}
+	
+	private HttpSession getSession( HttpServletRequest request) {
+		session = request.getSession();
+		
+		return session;
+	}
 
 	/**
 	 * Metod que reescribe los campos del formulario
@@ -168,4 +188,5 @@ public class AltaMultaController extends HttpServlet {
 		request.setAttribute("concepto", concepto);
 		request.setAttribute("coche", c);
 	}
+	
 }

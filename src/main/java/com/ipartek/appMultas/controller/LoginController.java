@@ -27,6 +27,9 @@ public class LoginController extends HttpServlet {
 	private AgenteDAO daoAgente;
 	private MultaDAO daoMulta;
 	
+	private Agente agenteSession = null;
+	private HttpSession session = null;
+	
 	private final static Logger LOG = Logger.getLogger(LoginController.class);
 	
 	@Override
@@ -64,11 +67,12 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("password", password);
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}else {
-			
-			agente.setImporteAnual(daoMulta.getObjetivoAnual(agente.getId(), (long)obtenerAño()));
-			agente.setImporteMensual(daoMulta.getObjetivoMensual(agente.getId(), (long)obtenerAño(), (long)obtenerMes()));
-			HttpSession session = request.getSession();
-			session.setAttribute("agenteLogueado", agente);
+			agenteSession = agente;
+			session = getSession(request);
+			//session.setAttribute("agenteLogueado", agenteSession);
+
+			//agenteSession = getAgenteSession(session);
+			session.setAttribute("agenteLogueado", daoAgente.obtenerImportes(agenteSession));
 			session.setAttribute("mensaje", null);
 			// Redireccionar a index.jsp
 			//request.getRequestDispatcher("privado/index.jsp").forward(request, response);
@@ -77,18 +81,30 @@ public class LoginController extends HttpServlet {
 		}
 	}
 	
-	private int obtenerAño() {
-		Calendar cal = Calendar.getInstance();
-		int year = cal.get(Calendar.YEAR);
-		LOG.debug("Año actual para la búsqueda de estadísticas: " + year);
-		return year;
+	private Agente getAgenteSession( HttpSession session) {
+		agenteSession= (Agente) session.getAttribute("agenteLogueado");
+		
+		return agenteSession;
 	}
 	
-	private int obtenerMes() {
-		Calendar cal = Calendar.getInstance();
-		int month = cal.get(Calendar.MONTH);
-		LOG.debug("Mes actual para la búsqueda de estadísticas: " + month + 1);
-		return month + 1;
+	private HttpSession getSession( HttpServletRequest request) {
+		session = request.getSession();
+		
+		return session;
 	}
+	
+//	private int obtenerAño() {
+//		Calendar cal = Calendar.getInstance();
+//		int year = cal.get(Calendar.YEAR);
+//		LOG.debug("Año actual para la búsqueda de estadísticas: " + year);
+//		return year;
+//	}
+//	
+//	private int obtenerMes() {
+//		Calendar cal = Calendar.getInstance();
+//		int month = cal.get(Calendar.MONTH);
+//		LOG.debug("Mes actual para la búsqueda de estadísticas: " + month + 1);
+//		return month + 1;
+//	}
 
 }

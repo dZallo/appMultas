@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.ipartek.appMultas.modelo.dao.AgenteDAO;
 import com.ipartek.appMultas.modelo.dao.MultaDAO;
 import com.ipartek.appMultas.modelo.pojo.Agente;
 import com.ipartek.appMultas.modelo.pojo.Mensaje;
@@ -33,6 +34,10 @@ public class MultaController extends HttpServlet {
 	private static final String OP_DESANULAR = "5";
 
 	private MultaDAO daoMulta = null;
+	private AgenteDAO daoAgente = null;
+	
+	private Agente agente = null;
+	private HttpSession session = null;
 
 	private String vista;
 	private Mensaje alerta;
@@ -44,6 +49,7 @@ public class MultaController extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		daoMulta = MultaDAO.getInstance();
+		daoAgente = AgenteDAO.getInstance();
 	}
 
 	@Override
@@ -58,7 +64,7 @@ public class MultaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		vista = "listado";
 		alerta = new Mensaje();
 		try {
@@ -97,6 +103,9 @@ public class MultaController extends HttpServlet {
 	private void desAnular(HttpServletRequest request) {
 		try {
 			daoMulta.desAnularMulta(id);
+			session = getSession(request);
+			agente = getAgenteSession(session);
+			session.setAttribute("agenteLogueado", daoAgente.obtenerImportes(agente));
 			//listar(request);
 			alerta.setTipo(Mensaje.TIPO_SUCCESS);
 			alerta.setTexto("Se ha des-anulado la multa correctamente. ");
@@ -139,6 +148,9 @@ public class MultaController extends HttpServlet {
 	private void darDeBaja(HttpServletRequest request) {
 		try {
 			daoMulta.darBajaMulta(id);
+			session = getSession(request);
+			agente = getAgenteSession(session);
+			session.setAttribute("agenteLogueado", daoAgente.obtenerImportes(agente));
 			
 			listadoBaja(request);
 			alerta.setTipo(Mensaje.TIPO_SUCCESS);
@@ -147,6 +159,7 @@ public class MultaController extends HttpServlet {
 			
 			//recupero la multa que se ha dado de baja para mostrarla en el log
 			Multa mDeBaja= daoMulta.getById(id);
+			
 			LOG.info("Se ha dado de baja la multa :"+ mDeBaja.toString());
 			
 		} catch (SQLException e) {
@@ -189,5 +202,15 @@ public class MultaController extends HttpServlet {
 		LOG.debug(String.format("Parametros: op=%s id=%s", op, id));
 
 	}
-
+	private Agente getAgenteSession( HttpSession session) {
+		agente= (Agente) session.getAttribute("agenteLogueado");
+		
+		return agente;
+	}
+	
+	private HttpSession getSession( HttpServletRequest request) {
+		session = request.getSession();
+		
+		return session;
+	}
 }

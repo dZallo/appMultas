@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import org.apache.log4j.Logger;
 
@@ -16,6 +17,7 @@ public class AgenteDAO {
 
 	private final static Logger LOG = Logger.getLogger(AgenteDAO.class);
 	private static AgenteDAO INSTANCE = null;
+	private MultaDAO daoMulta;
 
 	// constructor privado, solo acceso por getInstance
 	private AgenteDAO() {
@@ -73,6 +75,29 @@ public class AgenteDAO {
 			LOG.debug(e);
 		}
 		return a;
+	}
+	
+	public Agente obtenerImportes(Agente a) {
+		daoMulta = MultaDAO.getInstance();
+		a.setImporteAnual(daoMulta.getObjetivoAnual(a.getId(), (long)obtenerAño()));
+		a.setImporteMensual(daoMulta.getObjetivoMensual(a.getId(), (long)obtenerAño(), (long)obtenerMes()));
+		
+		daoMulta = null;
+		return a;
+	}
+	
+	private int obtenerAño() {
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		LOG.debug("Año actual para la búsqueda de estadísticas: " + year);
+		return year;
+	}
+	
+	private int obtenerMes() {
+		Calendar cal = Calendar.getInstance();
+		int month = cal.get(Calendar.MONTH);
+		LOG.debug("Mes actual para la búsqueda de estadísticas: " + month + 1);
+		return month + 1;
 	}
 
 	/**
