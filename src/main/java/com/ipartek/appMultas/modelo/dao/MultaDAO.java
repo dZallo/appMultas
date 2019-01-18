@@ -50,11 +50,9 @@ public class MultaDAO {
 					m = rowMapperBaja(rs);
 				}
 			}
-
 		} catch (Exception e) {
 			LOG.debug(e);
 		}
-
 		return m;
 	}
 
@@ -73,7 +71,6 @@ public class MultaDAO {
 		} catch (Exception e) {
 			LOG.debug(e);
 		}
-
 		return multasAgente;
 	}
 
@@ -92,7 +89,6 @@ public class MultaDAO {
 		} catch (Exception e) {
 			LOG.debug(e);
 		}
-
 		return multasAgente;
 	}
 
@@ -136,10 +132,8 @@ public class MultaDAO {
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
 				result = true;
-
 			}
 		}
-
 		return result;
 	}
 
@@ -152,10 +146,8 @@ public class MultaDAO {
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
 				result = true;
-
 			}
 		}
-
 		return result;
 	}
 
@@ -166,8 +158,11 @@ public class MultaDAO {
 		m.setImporte(rs.getDouble("importe"));
 		m.setFecha(rs.getTimestamp("fecha_alta"));
 		// Seteo el coche
-		m.setCoche(
-				new Coche(rs.getLong("id_coche"), rs.getString("matricula"), rs.getString("modelo"), rs.getLong("km")));
+		m.setCoche( new Coche(
+							rs.getLong("id_coche"), 
+							rs.getString("matricula"), 
+							rs.getString("modelo"), 
+							rs.getLong("km")));
 		return m;
 	}
 
@@ -179,8 +174,11 @@ public class MultaDAO {
 		m.setFecha(rs.getTimestamp("fecha_alta"));
 		m.setFecha_baja(rs.getTimestamp("fecha_baja"));
 		// Seteo el coche
-		m.setCoche(
-				new Coche(rs.getLong("id_coche"), rs.getString("matricula"), rs.getString("modelo"), rs.getLong("km")));
+		m.setCoche( new Coche(
+							rs.getLong("id_coche"), 
+							rs.getString("matricula"), 
+							rs.getString("modelo"), 
+							rs.getLong("km")));
 		return m;
 	}
 

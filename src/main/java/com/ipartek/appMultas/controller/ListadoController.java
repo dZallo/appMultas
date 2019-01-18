@@ -31,7 +31,6 @@ public class ListadoController extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-
 		dao = MultaDAO.getInstance();
 	}
 
@@ -57,7 +56,6 @@ public class ListadoController extends HttpServlet {
 
 			multas = dao.getAllByIdAgente(a.getId());
 			request.setAttribute("multas", multas);
-
 		} catch (SQLException e) {
 			LOG.debug(e);
 		} finally {

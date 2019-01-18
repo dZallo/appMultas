@@ -1,42 +1,43 @@
 package com.ipartek.appMultas.modelo.pojo;
 
 public class Objetivo {
-	
 
 	private Double mes;
 	private Double anio;
 	private Double importeTotal;
-	
-	
-	
+
 	public Objetivo() {
 		super();
 	}
-	
-	public Objetivo( Double mes, Double anio, Double importeTotal) {
+
+	public Objetivo(Double mes, Double anio, Double importeTotal) {
 		this();
-	
+
 		setMes(mes);
 		setAnio(anio);
 		setImporteTotal(importeTotal);
-	
 	}
 
 	public Double getMes() {
 		return mes;
 	}
+
 	public void setMes(Double mes) {
 		this.mes = mes;
 	}
+
 	public Double getAnio() {
 		return anio;
 	}
+
 	public void setAnio(Double anio) {
 		this.anio = anio;
 	}
+
 	public Double getImporteTotal() {
 		return importeTotal;
 	}
+
 	public void setImporteTotal(Double importeTotal) {
 		this.importeTotal = importeTotal;
 	}
@@ -83,5 +84,4 @@ public class Objetivo {
 		return true;
 	}
 
-	
 }

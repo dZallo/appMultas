@@ -38,7 +38,6 @@ public class MultarController extends HttpServlet {
 		Coche c = (Coche) request.getAttribute("coche");
 		request.setAttribute("coche", c);
 		request.getRequestDispatcher("formulario.jsp").forward(request, response);
-
 	}
 
 }

@@ -96,10 +96,4 @@ public class Agente {
 				+ ", multas=" + multas + ", anual=" + anual + ", mensual=" + mensual + ", objetivoMeses="
 				+ objetivoMeses + "]";
 	}
-
-	
-
-
-
-
 }

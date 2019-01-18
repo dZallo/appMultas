@@ -68,7 +68,6 @@ public class MatriculaController extends HttpServlet {
 		vista = VIEW_MATRICULA;
 		try {
 			if (!matricula.equals("")) {
-
 				c = dao.getByMatricula(matricula);
 				if (c != null) {
 					// Comprobar que existe el coche
@@ -78,9 +77,8 @@ public class MatriculaController extends HttpServlet {
 					vista = CONTROLLER_MULTAR;
 				} else {
 					request.setAttribute("mensaje",
-							new Mensaje(Mensaje.TIPO_WARNING, "Esa matrícula no está registrada"));
+					new Mensaje(Mensaje.TIPO_WARNING, "Esa matrícula no está registrada"));
 				}
-
 			} else {
 				// Si no existe, crear alerta y volver a matricula.jsp
 				request.setAttribute("mensaje", new Mensaje(Mensaje.TIPO_WARNING, "Introduce una matricula"));
@@ -88,12 +86,10 @@ public class MatriculaController extends HttpServlet {
 		} catch (Exception e) {
 			LOG.trace(e.getMessage());
 			request.setAttribute("mensaje", new Mensaje(Mensaje.TIPO_DANGER, "ERROR INESPERADO"));
-
 		} finally {
 			request.setAttribute("matricula", matricula);
 			request.getRequestDispatcher(vista).forward(request, response);
-
 		}
 	}
-
+	
 }

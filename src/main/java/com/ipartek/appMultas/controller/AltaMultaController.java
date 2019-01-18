@@ -139,7 +139,6 @@ public class AltaMultaController extends HttpServlet {
 		} catch (Exception e) {
 			LOG.debug(e.getMessage());
 			request.setAttribute("mensaje", new Mensaje(Mensaje.TIPO_DANGER, "Error inesperado"));
-
 		}
 
 	}
@@ -151,7 +150,6 @@ public class AltaMultaController extends HttpServlet {
 	 */
 	private void getParameters(HttpServletRequest request) {
 		// Recoger datos
-		// String matricula = request.getParameter("matricula");
 		concepto = request.getParameter("concepto");
 		String importeTexto = request.getParameter("importe");
 		try {

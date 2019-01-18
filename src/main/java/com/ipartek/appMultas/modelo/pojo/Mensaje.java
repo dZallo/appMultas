@@ -12,14 +12,12 @@ public class Mensaje {
 
 	public Mensaje() {
 		super();
-		;
 	}
 
 	public Mensaje(String tipo, String texto) {
 		this();
 		setTexto(texto);
 		setTipo(tipo);
-
 	}
 
 	public String getTexto() {

@@ -9,8 +9,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class Multa {
-	private Long id;
 
+	private Long id;
 	@NotNull
 	@Min(value = 1, message = "El importe de la multa tiene que ser numérico y >=1")
 	private Double importe;
@@ -23,7 +23,6 @@ public class Multa {
 
 	public Multa() {
 		super();
-
 	}
 
 	public Multa(Long id, Double importe, String concepto, Timestamp fecha, Coche coche) {
@@ -75,7 +74,6 @@ public class Multa {
 	public void setCoche(Coche coche) {
 		this.coche = coche;
 	}
-	
 
 	public Timestamp getFecha_baja() {
 		return fecha_baja;
@@ -139,6 +137,5 @@ public class Multa {
 		return "Multa [id=" + id + ", importe=" + importe + ", concepto=" + concepto + ", fecha=" + fecha
 				+ ", fecha_baja=" + fecha_baja + ", coche=" + coche + "]";
 	}
-
 
 }

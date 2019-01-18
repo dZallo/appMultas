@@ -32,7 +32,6 @@ public class LoginController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		daoAgente = AgenteDAO.getInstance();
-
 	}
 
 	/**
@@ -78,7 +77,6 @@ public class LoginController extends HttpServlet {
 
 	private HttpSession getSession(HttpServletRequest request) {
 		session = request.getSession();
-
 		return session;
 	}
 

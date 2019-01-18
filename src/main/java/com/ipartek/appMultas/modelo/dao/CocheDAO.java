@@ -35,20 +35,16 @@ public class CocheDAO {
 
 		String sql = SQL_GETBYMATRICULA;
 
-		try (Connection conn = ConnectionManager.getConnection(); 
-			CallableStatement cs = conn.prepareCall(sql);
-			){
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
 			cs.setString(1, matricula);
 			try (ResultSet rs = cs.executeQuery();) {
 				while (rs.next()) {
 					c = rowMapper(rs);
 				}
 			}
-
 		} catch (Exception e) {
 			LOG.debug(e);
 		}
-
 		return c;
 	}
 
@@ -57,20 +53,16 @@ public class CocheDAO {
 
 		String sql = SQL_GETBYID;
 
-		try (Connection conn = ConnectionManager.getConnection(); 
-			CallableStatement cs = conn.prepareCall(sql);
-			){
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
 			cs.setLong(1, id);
 			try (ResultSet rs = cs.executeQuery();) {
 				while (rs.next()) {
 					c = rowMapper(rs);
 				}
 			}
-
 		} catch (Exception e) {
 			LOG.debug(e);
 		}
-
 		return c;
 	}
 

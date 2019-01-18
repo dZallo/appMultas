@@ -93,11 +93,19 @@ public class MultaController extends HttpServlet {
 		} catch (Exception e) {
 			LOG.error(e);
 		} finally {
-
 			// Ir a una vista
 			request.getRequestDispatcher(vista).forward(request, response);
 		}
 
+	}
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 	private void desAnular(HttpServletRequest request) {
@@ -106,11 +114,12 @@ public class MultaController extends HttpServlet {
 			session = getSession(request);
 			agente = getAgenteSession(session);
 			session.setAttribute("agenteLogueado", daoAgente.obtenerImportes(agente));
-			//listar(request);
+
 			alerta.setTipo(Mensaje.TIPO_SUCCESS);
 			alerta.setTexto("Se ha des-anulado la multa correctamente. ");
 			request.setAttribute("mensaje", alerta);
 			vista = "listado";
+			
 			//recupero la multa que se ha des-anulado para mostrarla en el log
 			Multa mDesAnulada= daoMulta.getById(id);
 			LOG.info("Se ha des-anulado la multa :"+ mDesAnulada.toString());
@@ -122,15 +131,6 @@ public class MultaController extends HttpServlet {
 			request.setAttribute("mensaje", alerta);
 		}
 		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 	private void listadoBaja(HttpServletRequest request) {
@@ -159,9 +159,7 @@ public class MultaController extends HttpServlet {
 			
 			//recupero la multa que se ha dado de baja para mostrarla en el log
 			Multa mDeBaja= daoMulta.getById(id);
-			
 			LOG.info("Se ha dado de baja la multa :"+ mDeBaja.toString());
-			
 		} catch (SQLException e) {
 			LOG.error(e);
 			alerta.setTipo(Mensaje.TIPO_DANGER);
@@ -174,7 +172,6 @@ public class MultaController extends HttpServlet {
 		alerta.setTipo(Mensaje.TIPO_INFO);
 		alerta.setTexto("Visualizando todas las multas activas. ");
 		request.setAttribute("mensaje", alerta);
-
 	}
 
 	private void irFormulario(HttpServletRequest request) {
@@ -198,19 +195,16 @@ public class MultaController extends HttpServlet {
 		} else {
 			id = Long.parseLong(request.getParameter("id"));
 		}
-
 		LOG.debug(String.format("Parametros: op=%s id=%s", op, id));
-
 	}
+	
 	private Agente getAgenteSession( HttpSession session) {
 		agente= (Agente) session.getAttribute("agenteLogueado");
-		
 		return agente;
 	}
 	
 	private HttpSession getSession( HttpServletRequest request) {
 		session = request.getSession();
-		
 		return session;
 	}
 }

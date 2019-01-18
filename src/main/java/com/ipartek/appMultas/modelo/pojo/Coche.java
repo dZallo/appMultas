@@ -16,7 +16,6 @@ public class Coche {
 		setMatricula(matricula);
 		setModelo(modelo);
 		setKm(km);
-
 	}
 
 	public Long getId() {
