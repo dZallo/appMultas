@@ -12,52 +12,53 @@
     	<div class="card bg-success text-white h-100">
     		<div class="card-body bg-success">
     		<div class="rotate">
-    			<i class="material-icons" style="font-size:48px;">trending_up</i>
+    			<i class="material-icons" style="font-size:36px;">trending_up</i>
     		</div>
-    		<h6 class="text-uppercase">Ganancias mensuales</h6>
+    		<h3 class="text-uppercase">Ganancias mensuales</h3>
     		
-			<c:choose>
-			  <c:when test="${agenteLogueado.importeMensual <= 700}">
-			    <h3 class="display-4 text-danger">${agenteLogueado.importeMensual}&euro; / 1000&euro;</h3>
-			  </c:when>
-			  <c:when test="${agenteLogueado.importeMensual >= 1000}">
-			    <h3 class="display-4">${agenteLogueado.importeMensual}&euro; / 1000&euro;</h3>
+		<c:choose>
+			  <c:when test="${agenteLogueado.mensual.importeTotal <= 700}"> --%>
+			    <h4 class="text-danger">${agenteLogueado.mensual.importeTotal}&euro; / 1000&euro;</h4>
+
+			</c:when>
+			  <c:when test="${agenteLogueado.mensual.importeTotal >= 1000}">
+			    <h4 class="">${agenteLogueado.mensual.importeTotal}&euro; / 1000&euro;</h4>
 			    <small>Has cumplido el objetivo mensual!</small>
 			  </c:when>
 			  <c:otherwise>
-			    <h3 class="display-4 text-warning">${agenteLogueado.importeMensual}&euro; / 1000&euro;</h3>
+			    <h4 class=" text-warning">${agenteLogueado.mensual.importeTotal}&euro; / 1000&euro;</h4>
 			    <small class="text-warning">Te quedan 
 				    <fmt:formatNumber type = "number" 
-	         			maxIntegerDigits = "2" value = "${(1000 - agenteLogueado.importeMensual)}" />
+	         			maxIntegerDigits = "2" value = "${(1000 - agenteLogueado.mensual.importeTotal)}" />
 				    	&euro; para cumplir el objetivo mensual.
 			    </small>
 			  </c:otherwise>
-			</c:choose>   		
+			</c:choose>   		 
 			
     		</div>
     	</div>
     </div>
-    <div class="col-xl-12 col-sm-6 py-2">
+   <div class="col-xl-12 col-sm-6 py-2">
     	<div class="card bg-info text-white h-100">
     		<div class="card-body bg-info">
     		<div class="rotate">
-    			<i class="material-icons" style="font-size:48px;">trending_up</i>
+    			<i class="material-icons" style="font-size:36px;">trending_up</i>
     		</div>
-    		<h6 class="text-uppercase">Ganancias anuales</h6>
+    		<h3 class="text-uppercase">Ganancias anuales</h3>
     		
     		<c:choose>
-			  <c:when test="${agenteLogueado.importeAnual <= 10000}">
-			    <h3 class="display-4 text-danger">${agenteLogueado.importeAnual}&euro; / 12000&euro;</h3>
+			  <c:when test="${agenteLogueado.anual.importeTotal <= 10000}">
+			    <h4 class=" text-danger">${agenteLogueado.anual.importeTotal}&euro; / 12000&euro;</h4>
 			  </c:when>
-			  <c:when test="${agenteLogueado.importeAnual >= 12000}">
-			    <h3 class="display-4">${agenteLogueado.importeAnual}&euro; / 12000&euro;</h3>
+			  <c:when test="${agenteLogueado.anual.importeTotal >= 12000}">
+			    <h4 class="">${agenteLogueado.anual.importeTotal}&euro; / 12000&euro;</h4>
 			    <small>Has cumplido el objetivo anual!</small>
 			  </c:when>
 			  <c:otherwise>
-			    <h3 class="display-4 text-warning">${agenteLogueado.importeAnual}&euro; / 12000&euro;</h3>
+			    <h4 class=" text-warning">${agenteLogueado.anual.importeTotal}&euro; / 12000&euro;</h4>
 			    <small class="text-warning">Te quedan 
 				    <fmt:formatNumber type = "number" 
-	         			maxIntegerDigits = "2" value = "${(12000 - agenteLogueado.importeAnual)}" />
+	         			maxIntegerDigits = "2" value = "${(12000 - agenteLogueado.anual.importeTotal)}" />
 				    	&euro; para cumplir el objetivo anual.
 			    </small>
 			  </c:otherwise>
@@ -65,6 +66,6 @@
     		
     		</div>
     	</div>
-    </div>
+    </div> 
 <%@include file="../includes/mensajes.jsp" %>
 <%@include file="../includes/pie.jsp" %>
