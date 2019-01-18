@@ -1,5 +1,6 @@
 package com.ipartek.appMultas.modelo.pojo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Agente {
@@ -8,8 +9,9 @@ public class Agente {
 	private String placa;
 	private Long id_departamento;
 	private HashMap<Long, Multa> multas;
-	private Double importeAnual;
-	private Double importeMensual;
+	private Objetivo anual;
+	private Objetivo mensual;
+	private ArrayList<Objetivo> objetivoMeses;
 
 	public Agente() {
 		super();
@@ -63,78 +65,40 @@ public class Agente {
 	public void setMultas(HashMap<Long, Multa> multas) {
 		this.multas = multas;
 	}
-	
 
-	public Double getImporteAnual() {
-		return importeAnual;
+	public Objetivo getAnual() {
+		return anual;
 	}
 
-	public void setImporteAnual(Double importeAnual) {
-		this.importeAnual = importeAnual;
+	public void setAnual(Objetivo anual) {
+		this.anual = anual;
 	}
 
-	public Double getImporteMensual() {
-		return importeMensual;
+	public Objetivo getMensual() {
+		return mensual;
 	}
 
-	public void setImporteMensual(Double importeMensual) {
-		this.importeMensual = importeMensual;
+	public void setMensual(Objetivo mensual) {
+		this.mensual = mensual;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((id_departamento == null) ? 0 : id_departamento.hashCode());
-		result = prime * result + ((multas == null) ? 0 : multas.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result + ((placa == null) ? 0 : placa.hashCode());
-		return result;
+	public ArrayList<Objetivo> getObjetivoMeses() {
+		return objetivoMeses;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Agente other = (Agente) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (id_departamento == null) {
-			if (other.id_departamento != null)
-				return false;
-		} else if (!id_departamento.equals(other.id_departamento))
-			return false;
-		if (multas == null) {
-			if (other.multas != null)
-				return false;
-		} else if (!multas.equals(other.multas))
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		if (placa == null) {
-			if (other.placa != null)
-				return false;
-		} else if (!placa.equals(other.placa))
-			return false;
-		return true;
+	public void setObjetivoMeses(ArrayList<Objetivo> objetivoMeses) {
+		this.objetivoMeses = objetivoMeses;
 	}
 
 	@Override
 	public String toString() {
 		return "Agente [id=" + id + ", nombre=" + nombre + ", placa=" + placa + ", id_departamento=" + id_departamento
-				+ ", multas=" + multas + ", importeAnual=" + importeAnual + ", importeMensual=" + importeMensual + "]";
+				+ ", multas=" + multas + ", anual=" + anual + ", mensual=" + mensual + ", objetivoMeses="
+				+ objetivoMeses + "]";
 	}
+
+	
+
 
 
 
