@@ -4,7 +4,7 @@
       <p>Ander Solana &#38; Daniel Zallo</p>
     </div>
   </footer>
-</div>
+
 <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -31,6 +31,7 @@
 	    });
 	} );
 	</script>
+	</div>
 </body>
 </html>
 
