@@ -2,6 +2,7 @@ package com.ipartek.appMultas.modelo.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -14,10 +15,11 @@ public class AgenteDAO {
 
 	private final static String SQL_GETBYID = "{call agente_getById(?)}";
 	private final static String SQL_LOGIN = "{call agente_login(?,?)}";
+	private final static String SQL_OBJETIVOS_ANIO = "SELECT id_agente,anio,multasAsignadas,totalMultasAnual FROM v_objetivos_anio WHERE id_agente=? AND anio=?;";
+	private final static String SQL_OBJETIVOS_MES = "SELECT id_agente,mes,anio,multasAsignadas,totalMultasMes FROM v_objetivos_mes WHERE id_agente=? AND mes=? AND anio=?;";
 
 	private final static Logger LOG = Logger.getLogger(AgenteDAO.class);
 	private static AgenteDAO INSTANCE = null;
-	private MultaDAO daoMulta;
 
 	// constructor privado, solo acceso por getInstance
 	private AgenteDAO() {
@@ -31,14 +33,12 @@ public class AgenteDAO {
 		}
 		return INSTANCE;
 	}
-	
+
 	public Agente login(String placa, String password) {
 		Agente a = null;
 
 		String sql = SQL_LOGIN;
-		try (Connection conn = ConnectionManager.getConnection();
-			CallableStatement cs = conn.prepareCall(sql);
-			){
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
 			cs.setString(1, placa);
 			cs.setString(2, password);
 			try (ResultSet rs = cs.executeQuery();) {
@@ -62,9 +62,7 @@ public class AgenteDAO {
 		Agente a = new Agente();
 
 		String sql = SQL_GETBYID;
-		try (Connection conn = ConnectionManager.getConnection();
-			CallableStatement cs = conn.prepareCall(sql);
-			){
+		try (Connection conn = ConnectionManager.getConnection(); CallableStatement cs = conn.prepareCall(sql);) {
 			cs.setLong(1, id);
 			try (ResultSet rs = cs.executeQuery();) {
 				while (rs.next()) {
@@ -76,23 +74,77 @@ public class AgenteDAO {
 		}
 		return a;
 	}
-	
+
+	/**
+	 * Obtiene la suma total de los importes del año y el agente seleccionado
+	 * 
+	 * @param id_agente
+	 * @param anio
+	 * @return
+	 */
+	public Double getObjetivoAnual(Long id_agente, Long anio) {
+
+		Double importeAnual = 0.0;
+
+		String sql = SQL_OBJETIVOS_ANIO;
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+			pst.setLong(1, id_agente);
+			pst.setLong(2, anio);
+			try (ResultSet rs = pst.executeQuery();) {
+				while (rs.next()) {
+					importeAnual = rs.getDouble("totalMultasAnual");
+				}
+			}
+
+		} catch (Exception e) {
+			LOG.debug(e);
+		}
+		return importeAnual;
+	}
+
+	/**
+	 * Obtiene la suma total de los importes del año, el mes y el agente
+	 * seleccionado
+	 * 
+	 * @param id_agente
+	 * @param anio
+	 * @param mes
+	 * @return
+	 */
+	public Double getObjetivoMensual(Long id_agente, Long anio, Long mes) {
+		Double importeMensual = 0.0;
+		String sql = SQL_OBJETIVOS_MES;
+		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+			pst.setLong(1, id_agente);
+			pst.setLong(2, mes);
+			pst.setLong(3, anio);
+			try (ResultSet rs = pst.executeQuery();) {
+				while (rs.next()) {
+					importeMensual = rs.getDouble("totalMultasMes");
+				}
+			}
+
+		} catch (Exception e) {
+			LOG.debug(e);
+		}
+
+		return importeMensual;
+	}
+
 	public Agente obtenerImportes(Agente a) {
-		daoMulta = MultaDAO.getInstance();
-		a.setImporteAnual(daoMulta.getObjetivoAnual(a.getId(), (long)obtenerAño()));
-		a.setImporteMensual(daoMulta.getObjetivoMensual(a.getId(), (long)obtenerAño(), (long)obtenerMes()));
-		
-		daoMulta = null;
+		a.setImporteAnual(getObjetivoAnual(a.getId(), (long) obtenerAnio()));
+		a.setImporteMensual(getObjetivoMensual(a.getId(), (long) obtenerAnio(), (long) obtenerMes()));
+
 		return a;
 	}
-	
-	private int obtenerAño() {
+
+	private int obtenerAnio() {
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
 		LOG.debug("Año actual para la búsqueda de estadísticas: " + year);
 		return year;
 	}
-	
+
 	private int obtenerMes() {
 		Calendar cal = Calendar.getInstance();
 		int month = cal.get(Calendar.MONTH);
