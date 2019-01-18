@@ -10,6 +10,7 @@ import java.util.Calendar;
 import org.apache.log4j.Logger;
 
 import com.ipartek.appMultas.modelo.pojo.Agente;
+import com.ipartek.appMultas.modelo.pojo.Objetivo;
 
 public class AgenteDAO {
 
@@ -75,44 +76,34 @@ public class AgenteDAO {
 		return a;
 	}
 
-	/**
-	 * Obtiene la suma total de los importes del año y el agente seleccionado
-	 * 
-	 * @param id_agente
-	 * @param anio
-	 * @return
-	 */
-	public Double getObjetivoAnual(Long id_agente, Long anio) {
-
-		Double importeAnual = 0.0;
-
+	public Objetivo getObjetivosAnual(Long id_agente, Long anio) {
+		Objetivo o = new Objetivo();
 		String sql = SQL_OBJETIVOS_ANIO;
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 			pst.setLong(1, id_agente);
 			pst.setLong(2, anio);
 			try (ResultSet rs = pst.executeQuery();) {
 				while (rs.next()) {
-					importeAnual = rs.getDouble("totalMultasAnual");
+					//Crear objeto Objetivo
+					
+					o.setAnio(rs.getDouble("anio"));
+					o.setImporteTotal(rs.getDouble("totalMultasAnual"));
+					//Añadir objetivo al listado
+					
 				}
 			}
 
 		} catch (Exception e) {
 			LOG.debug(e);
 		}
-		return importeAnual;
+		
+		//devolver listado de objetivos
+		return o;
 	}
 
-	/**
-	 * Obtiene la suma total de los importes del año, el mes y el agente
-	 * seleccionado
-	 * 
-	 * @param id_agente
-	 * @param anio
-	 * @param mes
-	 * @return
-	 */
-	public Double getObjetivoMensual(Long id_agente, Long anio, Long mes) {
-		Double importeMensual = 0.0;
+
+	public Objetivo getObjetivoMensual(Long id_agente, Long anio, Long mes) {
+		Objetivo o = new Objetivo();
 		String sql = SQL_OBJETIVOS_MES;
 		try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 			pst.setLong(1, id_agente);
@@ -120,20 +111,31 @@ public class AgenteDAO {
 			pst.setLong(3, anio);
 			try (ResultSet rs = pst.executeQuery();) {
 				while (rs.next()) {
-					importeMensual = rs.getDouble("totalMultasMes");
+					//Crear objeto Objetivo
+					
+					o.setAnio(rs.getDouble("anio"));
+					o.setImporteTotal(rs.getDouble("totalMultasMes"));
+					o.setMes(rs.getDouble("mes"));
+					//Añadir objetivo al listado
+					
 				}
 			}
 
 		} catch (Exception e) {
 			LOG.debug(e);
 		}
-
-		return importeMensual;
+		//devolver listado de objetivos
+		return o;
 	}
 
 	public Agente obtenerImportes(Agente a) {
-		a.setImporteAnual(getObjetivoAnual(a.getId(), (long) obtenerAnio()));
-		a.setImporteMensual(getObjetivoMensual(a.getId(), (long) obtenerAnio(), (long) obtenerMes()));
+		a.setAnual(getObjetivosAnual(a.getId(), (long) obtenerAnio()));
+		a.setMensual(getObjetivoMensual(a.getId(), (long) obtenerAnio(),(long) obtenerMes()));
+		//OBTENER TODOS LOS MESES DE UN AÑO ARRAYLIST OBJETIVOS
+		//a.setObjetivoMeses(objetivoMeses);
+		
+	
+		
 
 		return a;
 	}
@@ -167,4 +169,5 @@ public class AgenteDAO {
 		a.setId_departamento(rs.getLong("id_departamento"));
 		return a;
 	}
+
 }
