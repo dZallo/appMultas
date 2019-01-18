@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.apache.log4j.Logger;
@@ -18,7 +19,8 @@ public class AgenteDAO {
 	private final static String SQL_LOGIN = "{call agente_login(?,?)}";
 	private final static String SQL_OBJETIVOS_ANIO = "SELECT id_agente,anio,multasAsignadas,totalMultasAnual FROM v_objetivos_anio WHERE id_agente=? AND anio=?;";
 	private final static String SQL_OBJETIVOS_MES = "SELECT id_agente,mes,anio,multasAsignadas,totalMultasMes FROM v_objetivos_mes WHERE id_agente=? AND mes=? AND anio=?;";
-
+	private final static String SQL_OBJETIVOS_MESES_ANIO="SELECT id_agente,mes,anio,multasAsignadas,totalMultasMes FROM v_objetivos_mes WHERE id_agente=? AND anio=? ORDER BY mes ASC;";
+	
 	private final static Logger LOG = Logger.getLogger(AgenteDAO.class);
 	private static AgenteDAO INSTANCE = null;
 
@@ -85,19 +87,13 @@ public class AgenteDAO {
 			try (ResultSet rs = pst.executeQuery();) {
 				while (rs.next()) {
 					//Crear objeto Objetivo
-					
 					o.setAnio(rs.getDouble("anio"));
-					o.setImporteTotal(rs.getDouble("totalMultasAnual"));
-					//Añadir objetivo al listado
-					
+					o.setImporteTotal(rs.getDouble("totalMultasAnual"));		
 				}
 			}
-
 		} catch (Exception e) {
 			LOG.debug(e);
 		}
-		
-		//devolver listado de objetivos
 		return o;
 	}
 
@@ -112,20 +108,46 @@ public class AgenteDAO {
 			try (ResultSet rs = pst.executeQuery();) {
 				while (rs.next()) {
 					//Crear objeto Objetivo
-					
 					o.setAnio(rs.getDouble("anio"));
 					o.setImporteTotal(rs.getDouble("totalMultasMes"));
 					o.setMes(rs.getDouble("mes"));
-					//Añadir objetivo al listado
-					
 				}
 			}
 
 		} catch (Exception e) {
 			LOG.debug(e);
 		}
-		//devolver listado de objetivos
+		
 		return o;
+	}
+	//TODO hacer metodo que obtenga todos los objetivos(meses) de un año 
+	public ArrayList<Objetivo> getObjetivoMeses(Long id_agente, Long anio){
+		ArrayList<Objetivo> objetivos = new ArrayList<Objetivo>();
+		String sql = SQL_OBJETIVOS_MESES_ANIO;
+		try(
+			Connection conn= ConnectionManager.getConnection();
+			PreparedStatement pst = conn.prepareStatement(sql);
+			){
+			pst.setLong(1, id_agente);
+			pst.setLong(2, anio);
+			try(
+				ResultSet rs = pst.executeQuery();
+				){
+				while(rs.next()) {
+					Objetivo o = new Objetivo();
+					//Crear objeto Objetivo
+					o.setAnio(rs.getDouble("anio"));
+					o.setImporteTotal(rs.getDouble("totalMultasMes"));
+					o.setMes(rs.getDouble("mes"));
+					
+					//añadir objetivo al array
+					objetivos.add(o);
+				}
+			}	
+		}catch (Exception e) {
+			LOG.debug(e);
+		}
+		return objetivos;
 	}
 
 	public Agente obtenerImportes(Agente a) {
@@ -133,10 +155,6 @@ public class AgenteDAO {
 		a.setMensual(getObjetivoMensual(a.getId(), (long) obtenerAnio(),(long) obtenerMes()));
 		//OBTENER TODOS LOS MESES DE UN AÑO ARRAYLIST OBJETIVOS
 		//a.setObjetivoMeses(objetivoMeses);
-		
-	
-		
-
 		return a;
 	}
 
