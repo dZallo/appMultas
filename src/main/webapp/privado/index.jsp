@@ -66,7 +66,8 @@
     		</div>
     	</div>
     </div> 
-    <select>
+    Seleccionar el año: 
+    <select class="form-control">
     	<option>2018</option>
     	<option selected>2019</option>
     </select>
