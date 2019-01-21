@@ -194,7 +194,7 @@ public class AgenteDAO {
 		// OBTENER TODOS LOS MESES DE UN AÑO ARRAYLIST OBJETIVOS
 		// TODO Printar el array en el jsp
 		//Se le pasaria el año que seleccionaria el agente por el select option, acutalmente le decimos que saque todos los meses del año actual
-		a.setObjetivoMeses(getObjetivoMeses(a.getId(), (long) obtenerAnio()));
+		a.setObjetivoMeses(getObjetivoMeses(a.getId(), (long) 2018));
 		return a;
 	}
 

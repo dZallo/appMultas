@@ -68,8 +68,8 @@
     </div> 
     Seleccionar el año: 
     <select class="form-control">
-    	<option>2018</option>
-    	<option selected>2019</option>
+    	<option selected>2018</option>
+    	<option >2019</option>
     </select>
     <table class="table table-striped">
     	<thead class="thead-dark">
@@ -82,7 +82,7 @@
     	<c:forEach items="${agenteLogueado.objetivoMeses}" var="om">
          <tr>
         	<td>${om.mes }</td>
-   			<td>${om.importeTotal}</td>
+   			<td>${om.importeTotal}&euro;</td>
    		</tr> 
       </c:forEach>
     	</tbody>
