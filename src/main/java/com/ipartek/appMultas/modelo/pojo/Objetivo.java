@@ -2,7 +2,7 @@ package com.ipartek.appMultas.modelo.pojo;
 
 public class Objetivo {
 
-	private Double mes;
+	private String mes;
 	private Double anio;
 	private Double importeTotal;
 
@@ -10,7 +10,7 @@ public class Objetivo {
 		super();
 	}
 
-	public Objetivo(Double mes, Double anio, Double importeTotal) {
+	public Objetivo(String mes, Double anio, Double importeTotal) {
 		this();
 
 		setMes(mes);
@@ -18,11 +18,11 @@ public class Objetivo {
 		setImporteTotal(importeTotal);
 	}
 
-	public Double getMes() {
+	public String getMes() {
 		return mes;
 	}
 
-	public void setMes(Double mes) {
+	public void setMes(String mes) {
 		this.mes = mes;
 	}
 

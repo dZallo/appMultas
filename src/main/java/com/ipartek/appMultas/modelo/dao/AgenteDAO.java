@@ -110,7 +110,7 @@ public class AgenteDAO {
 					//Crear objeto Objetivo
 					o.setAnio(rs.getDouble("anio"));
 					o.setImporteTotal(rs.getDouble("totalMultasMes"));
-					o.setMes(rs.getDouble("mes"));
+					//o.setMes(rs.getDouble("mes"));
 				}
 			}
 
@@ -138,8 +138,46 @@ public class AgenteDAO {
 					//Crear objeto Objetivo
 					o.setAnio(rs.getDouble("anio"));
 					o.setImporteTotal(rs.getDouble("totalMultasMes"));
-					o.setMes(rs.getDouble("mes"));
-					
+					switch (rs.getInt("mes")) {
+					case 1:
+						o.setMes("Enero");
+						break;
+					case 2:
+						o.setMes("Febrero");
+						break;
+					case 3:
+						o.setMes("Marzo");
+						break;
+					case 4:
+						o.setMes("Abril");
+						break;
+					case 5:
+						o.setMes("Mayo");
+						break;
+					case 6:
+						o.setMes("Junio");
+						break;
+					case 7:
+						o.setMes("Julio");
+						break;
+					case 8:
+						o.setMes("Agosto");
+						break;
+					case 9:
+						o.setMes("Septiembre");
+						break;
+					case 10:
+						o.setMes("Octubre");
+						break;
+					case 11:
+						o.setMes("Noviembre");
+						break;
+					case 12:
+						o.setMes("Diciembre");
+						break;
+					default:
+						o.setMes("Error en el mes");
+					}
 					//añadir objetivo al array
 					objetivos.add(o);
 				}

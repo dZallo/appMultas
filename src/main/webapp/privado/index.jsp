@@ -17,7 +17,7 @@
     		<h3 class="text-uppercase">Ganancias mensuales</h3>
     		
 		<c:choose>
-			  <c:when test="${agenteLogueado.mensual.importeTotal <= 700}"> --%>
+			  <c:when test="${agenteLogueado.mensual.importeTotal <= 700}"> 
 			    <h4 class="text-danger">${agenteLogueado.mensual.importeTotal}&euro; / 1000&euro;</h4>
 
 			</c:when>
@@ -63,9 +63,34 @@
 			    </small>
 			  </c:otherwise>
 			</c:choose> 
-    		
     		</div>
     	</div>
     </div> 
+    <select>
+    	<option>2018</option>
+    	<option selected>2019</option>
+    </select>
+    <table class="table table-striped">
+    	<thead class="thead-dark">
+    		<tr>
+    			<th>Mes</th>
+    			<th>Importe</th>
+    		</tr>
+    	</thead>
+    	<tbody class="tbody-light">
+    	<c:forEach items="${agenteLogueado.objetivoMeses}" var="om">
+         <tr>
+        	<td>${om.mes }</td>
+   			<td>${om.importeTotal}</td>
+   		</tr> 
+      </c:forEach>
+    	</tbody>
+    	<tfoot class="tfoot-dark">
+    	<tr>
+   			<th>Mes</th>
+   			<th>Importe</th>
+   		</tr>
+    	</tfoot>
+    </table>
 <%@include file="../includes/mensajes.jsp" %>
 <%@include file="../includes/pie.jsp" %>
