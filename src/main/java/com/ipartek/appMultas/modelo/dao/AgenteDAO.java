@@ -153,8 +153,10 @@ public class AgenteDAO {
 	public Agente obtenerImportes(Agente a) {
 		a.setAnual(getObjetivosAnual(a.getId(), (long) obtenerAnio()));
 		a.setMensual(getObjetivoMensual(a.getId(), (long) obtenerAnio(),(long) obtenerMes()));
-		//OBTENER TODOS LOS MESES DE UN AÑO ARRAYLIST OBJETIVOS
-		//a.setObjetivoMeses(objetivoMeses);
+		// OBTENER TODOS LOS MESES DE UN AÑO ARRAYLIST OBJETIVOS
+		// TODO Printar el array en el jsp
+		//Se le pasaria el año que seleccionaria el agente por el select option, acutalmente le decimos que saque todos los meses del año actual
+		a.setObjetivoMeses(getObjetivoMeses(a.getId(), (long) obtenerAnio()));
 		return a;
 	}
 
