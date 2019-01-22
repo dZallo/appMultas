@@ -29,7 +29,11 @@ public class CocheDAO {
 		}
 		return INSTANCE;
 	}
-
+	/**
+	 * Obtiene un coche a partir de la matrícula que recibe por parámetro. 
+	 * @param matricula Matrícula del coche
+	 * @return Coche con dicha matricula. Null si el coche no existe.
+	 */
 	public Coche getByMatricula(String matricula) {
 		Coche c = null;
 
@@ -47,7 +51,11 @@ public class CocheDAO {
 		}
 		return c;
 	}
-
+	/**
+	 * Obtiene un coche a partir del ID que recibe por parámetro. 
+	 * @param id ID del coche en la BD.
+	 * @return Coche con dicho ID. Null si el coche no existe.
+	 */
 	public Coche getBYId(Long id) {
 		Coche c = new Coche();
 
@@ -65,7 +73,12 @@ public class CocheDAO {
 		}
 		return c;
 	}
-
+	/**
+	 * Constructor del coche mediante una consulta a la BD. 
+	 * @param rs REsultSet de la consulta realizada a la BD. 
+	 * @return Coche existente en la BD.
+	 * @throws SQLException
+	 */
 	private Coche rowMapper(ResultSet rs) throws SQLException {
 		Coche c = new Coche();
 		c.setId(rs.getLong("id"));

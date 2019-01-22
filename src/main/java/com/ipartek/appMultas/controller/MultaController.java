@@ -107,7 +107,12 @@ public class MultaController extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
+	/**
+	 * Desanula una multa en la BD (Actualiza el campo fecha_modificacion y pone a NULL el campo fecha_baja).
+	 * Actualiza los importes de los objetivos del agente.
+	 * Crea una alerta para notificar al usuario. 
+	 * @param request
+	 */
 	private void desAnular(HttpServletRequest request) {
 		try {
 			daoMulta.desAnularMulta(id);
@@ -132,7 +137,11 @@ public class MultaController extends HttpServlet {
 		}
 		
 	}
-
+	/**
+	 * Redirecciona al usuario a la página correspondiente para visualizar todas las multas anuladas. 
+	 * Obtiene todas las multas anuladas por el agente logueado (en sesión).
+	 * @param request
+	 */
 	private void listadoBaja(HttpServletRequest request) {
 		vista = "listadoBajas.jsp";
 		HttpSession session = request.getSession();
@@ -144,7 +153,12 @@ public class MultaController extends HttpServlet {
 		}
 
 	}
-
+	/**
+	 * Da de baja una multa en la BD (Actualiza el campo fecha_baja).
+	 * Actualiza los importes de los objetivos del agente.
+	 * Crea una alerta para notificar al usuario. 
+	 * @param request
+	 */
 	private void darDeBaja(HttpServletRequest request) {
 		try {
 			daoMulta.darBajaMulta(id);
@@ -167,13 +181,19 @@ public class MultaController extends HttpServlet {
 			request.setAttribute("mensaje", alerta);
 		}
 	}
-
+	/**
+	 * Nos redirecciona a la página correspondiente para visualizar todas las multas activas.
+	 * @param request
+	 */
 	private void listar(HttpServletRequest request) {
 		alerta.setTipo(Mensaje.TIPO_INFO);
 		alerta.setTexto("Visualizando todas las multas activas. ");
 		request.setAttribute("mensaje", alerta);
 	}
-
+	/**
+	 * Proporciona la dirección de la vista de formulario. 
+	 * @param request
+	 */
 	private void irFormulario(HttpServletRequest request) {
 		vista = "detalle.jsp";
 		Multa m = new Multa();
@@ -183,7 +203,10 @@ public class MultaController extends HttpServlet {
 		}
 		request.setAttribute("multa", m);
 	}
-
+	/**
+	 * Obtiene todos los parámetros de la request actual. 
+	 * @param request
+	 */
 	private void getParametros(HttpServletRequest request) {
 		op = request.getParameter("op");
 		if (op == null) {
@@ -197,12 +220,20 @@ public class MultaController extends HttpServlet {
 		}
 		LOG.debug(String.format("Parametros: op=%s id=%s", op, id));
 	}
-	
+	/**
+	 * Obtiene el agente de la sesión actual (logueado)
+	 * @param session Sesión actual
+	 * @return Agente logueado
+	 */
 	private Agente getAgenteSession( HttpSession session) {
 		agente= (Agente) session.getAttribute("agenteLogueado");
 		return agente;
 	}
-	
+	/**
+	 * Obtiene la sesión existente de la request enviada por parámetro
+	 * @param request 
+	 * @return Session actual
+	 */
 	private HttpSession getSession( HttpServletRequest request) {
 		session = request.getSession();
 		return session;

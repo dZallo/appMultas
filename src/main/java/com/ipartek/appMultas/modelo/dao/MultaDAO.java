@@ -38,7 +38,11 @@ public class MultaDAO {
 		}
 		return INSTANCE;
 	}
-
+	/**
+	 * Obtiene una multa con un ID concreto recibido por parámetro.
+	 * @param idMulta ID de la multa en la BD. 
+	 * @return Multa existente en la BD. 
+	 */
 	public Multa getById(Long idMulta) {
 		Multa m = new Multa();
 
@@ -55,7 +59,12 @@ public class MultaDAO {
 		}
 		return m;
 	}
-
+	/**
+	 * Obtiene todas las multas activas de un agente concreto. 
+	 * @param idAgente ID del agente sobre el que se quieren obtener las multas. 
+	 * @return HashMap de multas. 
+	 * @throws SQLException
+	 */
 	public HashMap<Long, Multa> getAllByIdAgente(Long idAgente) throws SQLException {
 		HashMap<Long, Multa> multasAgente = new HashMap<>();
 		Multa m = new Multa();
@@ -73,7 +82,12 @@ public class MultaDAO {
 		}
 		return multasAgente;
 	}
-
+	/**
+	 * Obtiene todas las multas anuladas de un agente concreto. 
+	 * @param idAgente ID del agente sobre el que se quieren obtener las multas. 
+	 * @return HashMap de multas anuladas. 
+	 * @throws SQLException
+	 */
 	public HashMap<Long, Multa> getAllByIdAgenteDarBaja(Long idAgente) throws SQLException {
 		HashMap<Long, Multa> multasAgente = new HashMap<>();
 		Multa m = new Multa();
@@ -91,7 +105,13 @@ public class MultaDAO {
 		}
 		return multasAgente;
 	}
-
+	/**
+	 * Inserta una multa en la BD.
+	 * @param m Objeto multa
+	 * @param id_agente ID del creador de la multa
+	 * @return True si todo es correcto. False si la inserción es errónea. 
+	 * @throws SQLException
+	 */
 	public boolean insert(Multa m, Long id_agente) throws SQLException {
 		boolean resul = false;
 		String sql = SQL_INSERT;
@@ -116,11 +136,9 @@ public class MultaDAO {
 	}
 
 	/**
-	 * Este metodo actualiza el atributo fecha_baja, por lo tanto al tener un dato
-	 * en dicho campo significará que la multa se ha dado de baja
-	 * 
-	 * @param id
-	 * @return
+	 * Método que anula una multa en la BD.
+	 * @param id Identificador de la multa a anular
+	 * @return True si todo es correcto. False si la actualización es errónea.
 	 * @throws SQLException
 	 */
 	public boolean darBajaMulta(Long id) throws SQLException {
@@ -136,7 +154,12 @@ public class MultaDAO {
 		}
 		return result;
 	}
-
+	/**
+	 * Método que desanula una multa en la BD.
+	 * @param id Identificador de la multa a desanular
+	 * @return True si todo es correcto. False si la actualización es errónea.
+	 * @throws SQLException
+	 */
 	public boolean desAnularMulta(Long id) throws SQLException {
 		boolean result = false;
 		String sql = SQL_DESANULAR;
@@ -150,7 +173,12 @@ public class MultaDAO {
 		}
 		return result;
 	}
-
+	/**
+	 * Constructor de la multa obtenida de la BD. 
+	 * @param rs ResultSet de la consulta realizada a la BD.
+	 * @return Objeto multa creado a partir de datos de la BD.
+	 * @throws SQLException
+	 */
 	private Multa rowMapper(ResultSet rs) throws SQLException {
 		Multa m = new Multa();
 		m.setId(rs.getLong("id_multa"));
@@ -165,7 +193,12 @@ public class MultaDAO {
 							rs.getLong("km")));
 		return m;
 	}
-
+	/**
+	 * Constructor de la multa obtenida de la BD con la inclusión del campo fecha_baja. 
+	 * @param rs ResultSet de la consulta realizada a la BD.
+	 * @return Objeto multa creado a partir de datos de la BD + fecha_baja.
+	 * @throws SQLException
+	 */
 	private Multa rowMapperBaja(ResultSet rs) throws SQLException {
 		Multa m = new Multa();
 		m.setId(rs.getLong("id_multa"));

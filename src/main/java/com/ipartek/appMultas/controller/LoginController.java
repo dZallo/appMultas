@@ -74,7 +74,11 @@ public class LoginController extends HttpServlet {
 			}
 		}
 	}
-
+	/**
+	 * Obtiene la sesión existente de la request enviada por parámetro
+	 * @param request 
+	 * @return Session actual
+	 */
 	private HttpSession getSession(HttpServletRequest request) {
 		session = request.getSession();
 		return session;
