@@ -2,8 +2,10 @@
 Ander y Daniel
 
 App realizada para los agentes del ayuntamiento. Permite la creación y consulta de las multas registradas en la base de datos asociada. 
+La aplicación tiene diseño resposive, para permitir su uso en los dispositivos móviles de los agentes, ya que se entiende que será desde donde se use esta aplicación. 
 
 ## Listado de Tecnologías utilizadas: 
+- Java
 - Bootstrap 4
 - JQuery
 - DataTable
