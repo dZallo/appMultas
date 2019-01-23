@@ -8,7 +8,7 @@
     <div class="form-group">	    
 	    <label for="placa">Nº Placa: </label>
 	    <input type="number" class="form-control" id="placa" name="placa" 
-	    	   aria-describedby="placaHelp" placeholder="P.E: 1234" value="${placa}" required>
+	    	   aria-describedby="placaHelp" placeholder="P.E: 1234" value="${placa}" required autofocus>
   	</div>
   	<div class="form-group">	    
 	    <label for="password">Contraseña: </label>
