@@ -19,10 +19,9 @@
 	    <input type="number" class="form-control" id="importe" name="importe" aria-describedby="importeHelp" placeholder="P.E: 300" value="${importe}" autofocus step="any" required>
   	</div>
   	<div class="form-group">
-	    <label for="concepto">Concepto: </label>
+	    <label for="concepto">Concepto: (<b id="textoContador" name="textoContador">0</b> /255)</label>
 	    <textarea class="form-control" id="concepto" name="concepto" aria-describedby="importeHelp" 
 	    		  placeholder="Motivo de la sanción" onKeyDown="contadorFuncion()" onKeyUp="contadorFuncion()" required>${concepto}</textarea>
-  		<p><b id="textoContador" name="textoContador">0</b> /255</p>
   	</div>
   	<div class="form-group">
 	    <input type="hidden" id="id_coche" name="id_coche" value="${coche.id }">
